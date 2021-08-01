@@ -44,6 +44,12 @@ typedef struct Point2f {
     float y;
 } Point2f;
 
+typedef struct Point3f {
+    float x;
+    float y;
+    float z;
+} Point3f;
+
 // Wrapper for an individual cv::cvPoint
 typedef struct Point {
     int x;
@@ -62,11 +68,27 @@ typedef struct Points2f {
     int length;
 } Points2f;
 
+typedef struct Points3f {
+    Point3f *points;
+    int length;
+} Points3f;
+
 // Contour is alias for Points
 typedef Points Contour;
 
+
 // Contour2f is alias for Points2f
 typedef Points2f Contour2f;
+
+// Contour3f is alias for Points3f
+typedef Points3f Contour3f;
+
+// Wrapper for the vector of Points3f vectors aka std::vector< std::vector<Point3f> >
+typedef struct Contours3f {
+    Contour3f *contours;
+    int length;
+} Contours3f;
+
 
 // Wrapper for the vector of Points vectors aka std::vector< std::vector<Point> >
 typedef struct Contours {
@@ -208,6 +230,8 @@ typedef cv::RNG* RNG;
 typedef std::vector< cv::Point >* PointVector;
 typedef std::vector< std::vector< cv::Point > >* PointsVector;
 typedef std::vector< cv::Point2f >* Point2fVector;
+typedef std::vector< cv::Point3f >* Point3fVector;
+typedef std::vector< std::vector< cv::Point3f > >* Points3fVector;
 #else
 typedef void* Mat;
 typedef void* TermCriteria;
@@ -215,6 +239,8 @@ typedef void* RNG;
 typedef void* PointVector;
 typedef void* PointsVector;
 typedef void* Point2fVector;
+typedef void* Point3fVector;
+typedef void* Points3fVector;
 #endif
 
 // Wrapper for the vector of Mat aka std::vector<Mat>

@@ -37,6 +37,9 @@ Mat GetOptimalNewCameraMatrixWithParams(Mat cameraMatrix,Mat distCoeffs,Size siz
     return mat;
 }
 
+double CalibrateCamera(Point3fVector objectPoints, Point2f) {
+}
+
 void Undistort(Mat src, Mat dst, Mat cameraMatrix, Mat distCoeffs, Mat newCameraMatrix) {
     cv::undistort(*src, *dst, *cameraMatrix, *distCoeffs, *newCameraMatrix);
 }
