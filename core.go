@@ -2634,7 +2634,7 @@ func (pvs Points2fVector) Append(pv Point2fVector) {
 
 // Close closes and frees memory for this Points2fVector.
 func (pvs Points2fVector) Close() {
-	C.Points2fVector_Close(pvs)
+	C.Points2fVector_Close(pvs.p)
 }
 
 type Point3f struct {
@@ -2674,7 +2674,7 @@ func NewPoint3fVectorFromPoints(pts []Point3f) Point3fVector {
 		}
 	}
 
-	cPoints := C.struct_Point3f{
+	cPoints := C.struct_Points3f{
 		points: (*C.Point3f)(p),
 		length: C.int(len(pts)),
 	}
@@ -2781,5 +2781,5 @@ func (pvs Points3fVector) Append(pv Point3fVector) {
 
 // Close closes and frees memory for this Points3fVector.
 func (pvs Points3fVector) Close() {
-	C.Points3fVector_Close(pvs)
+	C.Points3fVector_Close(pvs.p)
 }

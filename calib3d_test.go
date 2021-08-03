@@ -406,6 +406,8 @@ func TestCalibrateCamera(t *testing.T) {
 	}
 
 	imagePoints := NewPoint2fVectorFromMat(corners)
+	defer imagePoints.Close()
+
 	objectPoints := []Point3f{}
 
 	for j := 0;j<size.Y;j++{
@@ -415,21 +417,28 @@ func TestCalibrateCamera(t *testing.T) {
 	}
 
 	cameraMatrix := NewMat()
+	defer cameraMatrix.Close()
 	distCoeffs := NewMat()
+	defer distCoeffs.Close()
 	rvecs := NewMat()
+	defer rvecs.Close()
 	tvecs := NewMat()
+	defer tvecs.Close()
 
 	objectPointsVector := NewPoints3fVectorFromPoints([][]Point3f{objectPoints})
-	imagePointsVector := NewPoints2fVectorFromPoints([][]Point2f{imagePoints.ToPoints()})
+	defer objectPointsVector.Close()
 
+	imagePointsVector := NewPoints2fVectorFromPoints([][]Point2f{imagePoints.ToPoints()})
+	defer imagePointsVector.Close()
 
 
 	CalibrateCamera(
 		objectPointsVector, imagePointsVector, image.Pt(img.Cols(), img.Rows()),
-			&cameraMatrix, &distCoeffs, &rvecs, &tvecs, CalibUseIntrinsicGuess,
+			&cameraMatrix, &distCoeffs, &rvecs, &tvecs, 0,
 		)
 
 	dst := NewMat()
+	defer dst.Close()
 	Undistort(img, &dst, cameraMatrix, distCoeffs, cameraMatrix)
 	IMWrite("images/chessboard_4x6_distort_correct.png", dst)
 }
