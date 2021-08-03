@@ -2574,15 +2574,18 @@ func (buffer *NativeByteBuffer) Len() int {
 func (buffer *NativeByteBuffer) Close() {
 	C.StdByteVectorFree(buffer.nativePointer())
 }
-
+// Points2fVector is a wrapper around a std::vector< std::vector< cv::Point2f > >*
 type Points2fVector struct {
 	p C.Points2fVector
 }
 
+// NewPoints2fVector returns a new empty Points2fVector.
 func NewPoints2fVector() Points2fVector {
 	return Points2fVector{p: C.Points2fVector_New()}
 }
 
+// NewPoints2fVectorFromPoints returns a new Points2fVector that has been
+// initialized to a slice of slices of Point2f.
 func NewPoints2fVectorFromPoints(pts [][]Point2f) Points2fVector {
 	pvf := NewPoints2fVector()
 	for j := 0;j<len(pts);j++{
@@ -2593,6 +2596,7 @@ func NewPoints2fVectorFromPoints(pts [][]Point2f) Points2fVector {
 	return pvf
 }
 
+// ToPoints returns a slice of slices of Point2f for the data in this Points2fVector.
 func (pvs Points2fVector) ToPoints() [][]Point2f {
 	ppoints := make([][]Point2f, pvs.Size())
 	for j := 0;j < pvs.Size();j++{
@@ -2603,14 +2607,17 @@ func (pvs Points2fVector) ToPoints() [][]Point2f {
 	return ppoints
 }
 
+// IsNil checks the CGo pointer in the Points2fVector.
 func (pvs Points2fVector) IsNil() bool {
 	return pvs.p == nil
 }
 
+// Size returns how many vectors of Points are in the Points2fVector.
 func (pvs Points2fVector) Size() int {
 	return int(C.Points2fVector_Size(pvs.p))
 }
 
+// At returns the Point2fVector at that index of the Points2fVector.
 func (pvs Points2fVector) At(idx int) Point2fVector {
 	if idx > pvs.Size() {
 		return Point2fVector{}
@@ -2618,12 +2625,14 @@ func (pvs Points2fVector) At(idx int) Point2fVector {
 	return Point2fVector{p : C.Points2fVector_At(pvs.p, C.int(idx))}
 }
 
+// Append appends a Point2fVector at end of the Points2fVector.
 func (pvs Points2fVector) Append(pv Point2fVector) {
 	if !pv.IsNil() {
 		C.Points2fVector_Append(pvs.p, pv.p)
 	}
 }
 
+// Close closes and frees memory for this Points2fVector.
 func (pvs Points2fVector) Close() {
 	C.Points2fVector_Close(pvs)
 }
@@ -2712,15 +2721,18 @@ func (pfv Point3fVector) Close() {
 	C.Point3fVector_Close(pfv.p)
 }
 
-
+// Points3fVector is a wrapper around a std::vector< std::vector< cv::Point3f > >*
 type Points3fVector struct {
 	p C.Points3fVector
 }
 
+// NewPoints3fVector returns a new empty Points3fVector.
 func NewPoints3fVector() Points3fVector {
 	return Points3fVector{p: C.Points3fVector_New()}
 }
 
+// NewPoints3fVectorFromPoints returns a new Points3fVector that has been
+// initialized to a slice of slices of Point3f.
 func NewPoints3fVectorFromPoints(pts [][]Point3f) Points3fVector {
 	pvf := NewPoints3fVector()
 	for j := 0;j<len(pts);j++{
@@ -2731,6 +2743,7 @@ func NewPoints3fVectorFromPoints(pts [][]Point3f) Points3fVector {
 	return pvf
 }
 
+// ToPoints returns a slice of slices of Point3f for the data in this Points3fVector.
 func (pvs Points3fVector) ToPoints() [][]Point3f {
 	ppoints := make([][]Point3f, pvs.Size())
 	for j := 0;j < pvs.Size();j++{
@@ -2741,14 +2754,17 @@ func (pvs Points3fVector) ToPoints() [][]Point3f {
 	return ppoints
 }
 
+// IsNil checks the CGo pointer in the Points3fVector.
 func (pvs Points3fVector) IsNil() bool {
 	return pvs.p == nil
 }
 
+// Size returns how many vectors of Points are in the Points3fVector.
 func (pvs Points3fVector) Size() int {
 	return int(C.Points3fVector_Size(pvs.p))
 }
 
+// At returns the Point3fVector at that index of the Points3fVector.
 func (pvs Points3fVector) At(idx int) Point3fVector {
 	if idx > pvs.Size() {
 		return Point3fVector{}
@@ -2756,12 +2772,14 @@ func (pvs Points3fVector) At(idx int) Point3fVector {
 	return Point3fVector{p : C.Points3fVector_At(pvs.p, C.int(idx))}
 }
 
+// Append appends a Point3fVector at end of the Points3fVector.
 func (pvs Points3fVector) Append(pv Point3fVector) {
 	if !pv.IsNil() {
 		C.Points3fVector_Append(pvs.p, pv.p)
 	}
 }
 
+// Close closes and frees memory for this Points3fVector.
 func (pvs Points3fVector) Close() {
 	C.Points3fVector_Close(pvs)
 }
