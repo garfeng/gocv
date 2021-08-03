@@ -962,7 +962,6 @@ void Point2fVector_Close(Point2fVector pv) {
 }
 
 
-
 void IntVector_Close(struct IntVector ivec) {
     delete[] ivec.val;
 }
@@ -1029,6 +1028,37 @@ uint8_t* StdByteVectorData(void *data) {
     return reinterpret_cast<std::vector<uchar> *>(data)->data();
 }
 
+Points2fVector Points2fVector_New(){
+    return new std::vector< std::vector< cv::Point2f > >;
+}
+
+Points2fVector Points2fVector_NewFromPoints(Contours2f points) {
+    Points2fVector pv = Points2fVector_New();
+    for(size_t i = 0;i<points.length;i++){
+        Contour2f contour2f = points.contours[i];
+        Point2fVector cntr = Point2fVector_NewFromPoints(contour2f);
+        Points2fVector_Append(pv, cntr);
+    }
+
+    return pv;
+}
+
+int Points2fVector_Size(Points2fVector ps) {
+    return ps->size();
+}
+
+Point2fVector Points2fVector_At(Points2fVector ps, int idx) {
+    return &(ps->at(idx));
+}
+
+void Points2fVector_Append(Points2fVector psv, Point2fVector pv) {
+    psv->push_back(*pv);
+}
+
+void Points2fVector_Close(Points2fVector ps) {
+    ps->clear();
+    delete ps;
+}
 
 Point3fVector Point3fVector_New() {
     return new std::vector< cv::Point3f >;
@@ -1067,7 +1097,7 @@ int Point3fVector_Size(Point3fVector pfv) {
     return pfv->size();
 }
 
-int Point3fVector_Close(Point3fVector pv) {
+void Point3fVector_Close(Point3fVector pv) {
     pv->clear();
     delete pv;
 }
