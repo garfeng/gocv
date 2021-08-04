@@ -500,6 +500,7 @@ void Points2fVector_Close(Points2fVector ps);
 Point3fVector Point3fVector_New();
 Point3fVector Point3fVector_NewFromPoints(Contour3f points);
 Point3fVector Point3fVector_NewFromMat(Mat mat);
+void Point3fVector_Append(Point3fVector pfv, Point3f point);
 Point3f Point3fVector_At(Point3fVector pfv, int idx);
 int Point3fVector_Size(Point3fVector pfv);
 void Point3fVector_Close(Point3fVector pv);
@@ -507,7 +508,6 @@ Points3fVector Points3fVector_New();
 Points3fVector Points3fVector_NewFromPoints(Contours3f points);
 int Points3fVector_Size(Points3fVector ps);
 Point3fVector Points3fVector_At(Points3fVector ps, int idx);
-void Points3fVector_Append(Points3fVector psv, Point3fVector pv);
 void Points3fVector_Append(Points3fVector psv, Point3fVector pv);
 void Points3fVector_Close(Points3fVector ps);
 

@@ -408,11 +408,16 @@ func TestCalibrateCamera(t *testing.T) {
 	imagePoints := NewPoint2fVectorFromMat(corners)
 	defer imagePoints.Close()
 
-	objectPoints := []Point3f{}
+	objectPoints := NewPoint3fVector()
+	defer objectPoints.Close()
 
 	for j := 0;j<size.Y;j++{
 		for i:=0;i<size.X;i++{
-			objectPoints = append(objectPoints, Point3f{X: float32(100 * i), Y: float32(100 *j), Z: 0})
+			objectPoints.Append(Point3f{
+				X: float32(100 * i),
+				Y: float32(100 * j),
+				Z: 0,
+			})
 		}
 	}
 
@@ -425,10 +430,12 @@ func TestCalibrateCamera(t *testing.T) {
 	tvecs := NewMat()
 	defer tvecs.Close()
 
-	objectPointsVector := NewPoints3fVectorFromPoints([][]Point3f{objectPoints})
+	objectPointsVector := NewPoints3fVector()
+	objectPointsVector.Append(objectPoints)
 	defer objectPointsVector.Close()
 
-	imagePointsVector := NewPoints2fVectorFromPoints([][]Point2f{imagePoints.ToPoints()})
+	imagePointsVector := NewPoints2fVector()
+	imagePointsVector.Append(imagePoints)
 	defer imagePointsVector.Close()
 
 

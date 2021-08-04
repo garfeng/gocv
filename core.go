@@ -166,6 +166,10 @@ type Point2f struct {
 	Y float32
 }
 
+func NewPoint2f(x, y float32) Point2f {
+	return Point2f{x, y}
+}
+
 var ErrEmptyByteSlice = errors.New("empty byte array")
 
 // Mat represents an n-dimensional dense numerical single-channel
@@ -2643,6 +2647,10 @@ type Point3f struct {
 	Z float32
 }
 
+func NewPoint3f(x, y, z float32) Point3f {
+	return Point3f{x, y, z}
+}
+
 // Point3fVector is a wrapper around a std::vector< cv::Point3f >*
 type Point3fVector struct {
 	p C.Point3fVector
@@ -2705,6 +2713,14 @@ func (pfv Point3fVector) At(idx int) Point3f {
 	}
 	cp := C.Point3fVector_At(pfv.p, C.int(idx))
 	return Point3f{X: float32(cp.x), Y: float32(cp.y), Z: float32(cp.z)}
+}
+
+func (pfv Point3fVector) Append(point Point3f) {
+	C.Point3fVector_Append(pfv.p, C.Point3f{
+		x: C.float(point.X),
+		y: C.float(point.Y),
+		z: C.float(point.Z),
+	});
 }
 
 // ToPoints returns a slice of Point3f for the data in this Point3fVector.

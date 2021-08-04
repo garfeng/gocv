@@ -1093,6 +1093,10 @@ Point3f Point3fVector_At(Point3fVector pfv, int idx) {
     };
 }
 
+void Point3fVector_Append(Point3fVector pfv, Point3f point) {
+    pfv->push_back(cv::Point3f(point.x, point.y, point.z));
+}
+
 int Point3fVector_Size(Point3fVector pfv) {
     return pfv->size();
 }
