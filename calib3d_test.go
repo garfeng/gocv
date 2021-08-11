@@ -454,8 +454,8 @@ func TestCalibrateCamera(t *testing.T) {
 	defer xor.Close()
 
 	BitwiseXor(dest, target, &xor)
-	if xor.Sum().Val1 != 0 {
-		t.Error("the undisorted image not equal the target one")
+	if xor.Sum().Val1 > 0 {
+		t.Error("the undisorted image not equal the target one:", xor.Sum().Val1)
 	}
 }
 
