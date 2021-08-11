@@ -453,9 +453,12 @@ func TestCalibrateCamera(t *testing.T) {
 	xor := NewMat()
 	defer xor.Close()
 
+	// The method for compare is ugly : different pix number < 0.5%
 	BitwiseXor(dest, target, &xor)
-	if xor.Sum().Val1 > 0 {
-		t.Error("the undisorted image not equal the target one:", xor.Sum().Val1)
+	differentPixelsNumber := xor.Sum().Val1
+	maxDifferentPixelsNumber := float64(img.Cols()*img.Rows()) * 0.005
+	if differentPixelsNumber > maxDifferentPixelsNumber {
+		t.Error("the undisorted image not equal the target one:", differentPixelsNumber, "bigger than", maxDifferentPixelsNumber)
 	}
 }
 
