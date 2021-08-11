@@ -394,7 +394,7 @@ func TestCalibrateCamera(t *testing.T) {
 	corners := NewMat()
 	defer corners.Close()
 
-	size := image.Pt(4,6)
+	size := image.Pt(4, 6)
 	found := FindChessboardCorners(img, size, &corners, 0)
 	if !found {
 		t.Error("chessboard pattern not found")
@@ -411,8 +411,8 @@ func TestCalibrateCamera(t *testing.T) {
 	objectPoints := NewPoint3fVector()
 	defer objectPoints.Close()
 
-	for j := 0;j<size.Y;j++{
-		for i:=0;i<size.X;i++{
+	for j := 0; j < size.Y; j++ {
+		for i := 0; i < size.X; i++ {
 			objectPoints.Append(Point3f{
 				X: float32(100 * i),
 				Y: float32(100 * j),
@@ -438,16 +438,25 @@ func TestCalibrateCamera(t *testing.T) {
 	imagePointsVector.Append(imagePoints)
 	defer imagePointsVector.Close()
 
-
 	CalibrateCamera(
 		objectPointsVector, imagePointsVector, image.Pt(img.Cols(), img.Rows()),
-			&cameraMatrix, &distCoeffs, &rvecs, &tvecs, 0,
-		)
+		&cameraMatrix, &distCoeffs, &rvecs, &tvecs, 0,
+	)
 
-	dst := NewMat()
-	defer dst.Close()
-	Undistort(img, &dst, cameraMatrix, distCoeffs, cameraMatrix)
-	IMWrite("images/chessboard_4x6_distort_correct.png", dst)
+	dest := NewMat()
+	defer dest.Close()
+	Undistort(img, &dest, cameraMatrix, distCoeffs, cameraMatrix)
+
+	target := IMRead("images/chessboard_4x6_distort_correct.png", IMReadGrayScale)
+	defer target.Close()
+
+	xor := NewMat()
+	defer xor.Close()
+
+	BitwiseXor(dest, target, &xor)
+	if xor.Sum().Val1 != 0 {
+		t.Error("the undisorted image not equal the target one")
+	}
 }
 
 func TestEstimateAffinePartial2D(t *testing.T) {
