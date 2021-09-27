@@ -220,6 +220,10 @@ void MinEnclosingCircle(PointVector pts, Point2f* center, float* radius){
     center->y = center2f.y;
 }
 
+void MinEnclosingTriangle(PointVector pts, Point2fVector triangle) {
+    cv::minEnclosingTriangle(*pts, *triangle);
+}
+
 PointsVector FindContours(Mat src, Mat hierarchy, int mode, int method) {
     PointsVector contours = new std::vector<std::vector<cv::Point> >;
     cv::findContours(*src, *contours, *hierarchy, mode, method);

@@ -535,6 +535,16 @@ func MinEnclosingCircle(pts PointVector) (x, y, radius float32) {
 	return x, y, radius
 }
 
+// MinEnclosingTriangle Finds a triangle of minimum area enclosing a 2D point set and returns its area.
+//
+// For further details, please see:
+// https://docs.opencv.org/3.4/d3/dc0/group__imgproc__shape.html#ga1513e72f6bbdfc370563664f71e0542f
+func MinEnclosingTriangle(pts PointVector) (triangle Point2fVector) {
+	triangle = NewPoint2fVector()
+	C.MinEnclosingTriangle(pts.p, triangle.p)
+	return
+}
+
 // FindContours finds contours in a binary image.
 //
 // For further details, please see:

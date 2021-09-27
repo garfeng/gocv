@@ -44,6 +44,7 @@ double ContourArea(PointVector pts);
 struct RotatedRect MinAreaRect(PointVector pts);
 struct RotatedRect FitEllipse(PointVector pts);
 void MinEnclosingCircle(PointVector pts, Point2f* center, float* radius);
+void MinEnclosingTriangle(PointVector pts, Point2fVector triangle);
 PointsVector FindContours(Mat src, Mat hierarchy, int mode, int method);
 double PointPolygonTest(PointVector pts, Point pt, bool measureDist);
 int ConnectedComponents(Mat src, Mat dst, int connectivity, int ltype, int ccltype);
