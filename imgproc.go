@@ -493,7 +493,7 @@ const (
 
 func MatchShapes(contour1, contour2 PointVector, method ShapeMatchModes, param float64) float64 {
 	result := C.MatchShapes(contour1.p, contour2.p, C.int(method), C.double(param))
-	return result
+	return float64(result)
 }
 
 // MinAreaRect finds a rotated rectangle of the minimum area enclosing the input 2D point set.
