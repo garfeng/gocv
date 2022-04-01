@@ -190,6 +190,10 @@ double ContourArea(PointVector pts) {
     return cv::contourArea(*pts);
 }
 
+double MatchShapes(PointVector contour1, PointVector contour2, int method, double param) {
+    return cv::matchShapes(*contour1, *contour2, method, param);
+}
+
 struct RotatedRect MinAreaRect(PointVector pts){
     cv::RotatedRect cvrect = cv::minAreaRect(*pts);
 

@@ -483,6 +483,19 @@ func toPoints(points C.Contour) []image.Point {
 	return points4
 }
 
+type ShapeMatchModes int
+
+const (
+	ShapeMatchModes_ContoursMatchI1 ShapeMatchModes = 1
+	ShapeMatchModes_ContoursMatchI2 ShapeMatchModes = 2
+	ShapeMatchModes_ContoursMatchI3 ShapeMatchModes = 3
+)
+
+func MatchShapes(contour1, contour2 PointVector, method ShapeMatchModes, param float64) float64 {
+	result := C.MatchShapes(contour1.p, contour2.p, C.int(method), C.double(param))
+	return result
+}
+
 // MinAreaRect finds a rotated rectangle of the minimum area enclosing the input 2D point set.
 //
 // For further details, please see:

@@ -41,6 +41,7 @@ void PyrUp(Mat src, Mat dst, Size dstsize, int borderType);
 struct Rect BoundingRect(PointVector pts);
 void BoxPoints(RotatedRect rect, Mat boxPts);
 double ContourArea(PointVector pts);
+double MatchShapes(PointVector contour1, PointVector contour2, int method, double param);
 struct RotatedRect MinAreaRect(PointVector pts);
 struct RotatedRect FitEllipse(PointVector pts);
 void MinEnclosingCircle(PointVector pts, Point2f* center, float* radius);
