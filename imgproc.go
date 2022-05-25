@@ -814,6 +814,8 @@ const (
 // https://docs.opencv.org/master/d4/d86/group__imgproc__filter.html#gac342a1bb6eabf6f55c803b09268e36dc
 //
 func GetStructuringElement(shape MorphShape, ksize image.Point) Mat {
+	Must(ksize.X > 0 && ksize.Y > 0, "ksize.X > 0 && ksize.Y > 0")
+
 	sz := C.struct_Size{
 		width:  C.int(ksize.X),
 		height: C.int(ksize.Y),

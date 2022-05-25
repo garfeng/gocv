@@ -194,6 +194,7 @@ func NewMat() Mat {
 
 // NewMatWithSize returns a new Mat with a specific size and type.
 func NewMatWithSize(rows int, cols int, mt MatType) Mat {
+	Must(rows > 0 && cols > 0, "rows > 0 && cols > 0")
 	return newMat(C.Mat_NewWithSize(C.int(rows), C.int(cols), C.int(mt)))
 }
 
@@ -264,6 +265,8 @@ func NewMatFromScalar(s Scalar, mt MatType) Mat {
 // NewMatWithSizeFromScalar returns a new Mat for a specific Scala value with a specific size and type
 // This simplifies creation of specific color filters or creating Mats of specific colors and sizes
 func NewMatWithSizeFromScalar(s Scalar, rows int, cols int, mt MatType) Mat {
+	Must(rows > 0 && cols > 0, "rows > 0 && cols > 0")
+
 	sVal := C.struct_Scalar{
 		val1: C.double(s.Val1),
 		val2: C.double(s.Val2),
@@ -276,6 +279,10 @@ func NewMatWithSizeFromScalar(s Scalar, rows int, cols int, mt MatType) Mat {
 
 // NewMatFromBytes returns a new Mat with a specific size and type, initialized from a []byte.
 func NewMatFromBytes(rows int, cols int, mt MatType, data []byte) (Mat, error) {
+	Must(rows > 0 && cols > 0, "rows > 0 && cols > 0")
+	pixSize := sizeOfMatType(mt)
+	MustEqual(pixSize*rows*cols, len(data), "sizeof(%v) * rows * cols != len(data)", mt)
+
 	cBytes, err := toByteArray(data)
 	if err != nil {
 		return Mat{}, err
@@ -558,6 +565,9 @@ func (m *Mat) DataPtrFloat64() ([]float64, error) {
 // region Mat will affect the original Mat, since they are pointers to the underlying
 // OpenCV Mat object.
 func (m *Mat) Region(rio image.Rectangle) Mat {
+	Must(rio.In(image.Rect(0, 0, m.Cols(), m.Rows())),
+		"rio inside mat.Bounds()")
+
 	cRect := C.struct_Rect{
 		x:      C.int(rio.Min.X),
 		y:      C.int(rio.Min.Y),
@@ -2028,6 +2038,10 @@ func NewPointVector() PointVector {
 // NewPointVectorFromPoints returns a new PointVector that has been
 // initialized to a slice of image.Point.
 func NewPointVectorFromPoints(pts []image.Point) PointVector {
+	if len(pts) == 0 {
+		return NewPointVector()
+	}
+
 	p := (*C.struct_Point)(C.malloc(C.size_t(C.sizeof_struct_Point * len(pts))))
 	defer C.free(unsafe.Pointer(p))
 
@@ -2056,6 +2070,10 @@ func NewPointVectorFromPoints(pts []image.Point) PointVector {
 // NewPointVectorFromMat returns a new PointVector that has been
 // wrapped around a Mat of type CV_32SC2 with a single columm.
 func NewPointVectorFromMat(mat Mat) PointVector {
+	if mat.Rows() == 0 {
+		return NewPointVector()
+	}
+
 	return PointVector{p: C.PointVector_NewFromMat(mat.p)}
 }
 
@@ -2119,6 +2137,10 @@ func NewPointsVector() PointsVector {
 // NewPointsVectorFromPoints returns a new PointsVector that has been
 // initialized to a slice of slices of image.Point.
 func NewPointsVectorFromPoints(pts [][]image.Point) PointsVector {
+	if len(pts) == 0 {
+		return NewPointsVector()
+	}
+
 	points := make([]C.struct_Points, len(pts))
 
 	for i, pt := range pts {
@@ -2220,6 +2242,10 @@ func NewPoint2fVector() Point2fVector {
 // NewPoint2fVectorFromPoints returns a new Point2fVector that has been
 // initialized to a slice of image.Point.
 func NewPoint2fVectorFromPoints(pts []Point2f) Point2fVector {
+	if len(pts) == 0 {
+		return NewPoint2fVector()
+	}
+
 	p := (*C.struct_Point2f)(C.malloc(C.size_t(C.sizeof_struct_Point2f * len(pts))))
 	defer C.free(unsafe.Pointer(p))
 
@@ -2248,6 +2274,10 @@ func NewPoint2fVectorFromPoints(pts []Point2f) Point2fVector {
 // NewPoint2fVectorFromMat returns a new Point2fVector that has been
 // wrapped around a Mat of type CV_32FC2 with a single columm.
 func NewPoint2fVectorFromMat(mat Mat) Point2fVector {
+	if mat.Rows() == 0 {
+		return NewPoint2fVector()
+	}
+
 	return Point2fVector{p: C.Point2fVector_NewFromMat(mat.p)}
 }
 
@@ -2582,6 +2612,7 @@ func (buffer *NativeByteBuffer) Len() int {
 func (buffer *NativeByteBuffer) Close() {
 	C.StdByteVectorFree(buffer.nativePointer())
 }
+
 // Points2fVector is a wrapper around a std::vector< std::vector< cv::Point2f > >*
 type Points2fVector struct {
 	p C.Points2fVector
@@ -2595,8 +2626,12 @@ func NewPoints2fVector() Points2fVector {
 // NewPoints2fVectorFromPoints returns a new Points2fVector that has been
 // initialized to a slice of slices of Point2f.
 func NewPoints2fVectorFromPoints(pts [][]Point2f) Points2fVector {
+	if len(pts) == 0 {
+		return NewPoints2fVector()
+	}
+
 	pvf := NewPoints2fVector()
-	for j := 0;j<len(pts);j++{
+	for j := 0; j < len(pts); j++ {
 		pv := NewPoint2fVectorFromPoints(pts[j])
 		pvf.Append(pv)
 		pv.Close()
@@ -2607,7 +2642,7 @@ func NewPoints2fVectorFromPoints(pts [][]Point2f) Points2fVector {
 // ToPoints returns a slice of slices of Point2f for the data in this Points2fVector.
 func (pvs Points2fVector) ToPoints() [][]Point2f {
 	ppoints := make([][]Point2f, pvs.Size())
-	for j := 0;j < pvs.Size();j++{
+	for j := 0; j < pvs.Size(); j++ {
 		pts := pvs.At(j)
 		points := pts.ToPoints()
 		ppoints[j] = points
@@ -2630,7 +2665,7 @@ func (pvs Points2fVector) At(idx int) Point2fVector {
 	if idx > pvs.Size() {
 		return Point2fVector{}
 	}
-	return Point2fVector{p : C.Points2fVector_At(pvs.p, C.int(idx))}
+	return Point2fVector{p: C.Points2fVector_At(pvs.p, C.int(idx))}
 }
 
 // Append appends a Point2fVector at end of the Points2fVector.
@@ -2668,6 +2703,10 @@ func NewPoint3fVector() Point3fVector {
 // NewPoint3fVectorFromPoints returns a new Point3fVector that has been
 // initialized to a slice of image.Point.
 func NewPoint3fVectorFromPoints(pts []Point3f) Point3fVector {
+	if len(pts) == 0 {
+		return NewPoint3fVector()
+	}
+
 	p := (*C.struct_Point3f)(C.malloc(C.size_t(C.sizeof_struct_Point3f * len(pts))))
 	defer C.free(unsafe.Pointer(p))
 
@@ -2697,6 +2736,10 @@ func NewPoint3fVectorFromPoints(pts []Point3f) Point3fVector {
 // NewPoint3fVectorFromMat returns a new Point3fVector that has been
 // wrapped around a Mat of type CV_32FC3 with a single columm.
 func NewPoint3fVectorFromMat(mat Mat) Point3fVector {
+	if mat.Rows() == 0 {
+		return NewPoint3fVector()
+	}
+
 	return Point3fVector{p: C.Point3fVector_NewFromMat(mat.p)}
 }
 
@@ -2724,7 +2767,7 @@ func (pfv Point3fVector) Append(point Point3f) {
 		x: C.float(point.X),
 		y: C.float(point.Y),
 		z: C.float(point.Z),
-	});
+	})
 }
 
 // ToPoints returns a slice of Point3f for the data in this Point3fVector.
@@ -2754,8 +2797,12 @@ func NewPoints3fVector() Points3fVector {
 // NewPoints3fVectorFromPoints returns a new Points3fVector that has been
 // initialized to a slice of slices of Point3f.
 func NewPoints3fVectorFromPoints(pts [][]Point3f) Points3fVector {
+	if len(pts) == 0 {
+		return NewPoints3fVector()
+	}
+
 	pvf := NewPoints3fVector()
-	for j := 0;j<len(pts);j++{
+	for j := 0; j < len(pts); j++ {
 		pv := NewPoint3fVectorFromPoints(pts[j])
 		pvf.Append(pv)
 		pv.Close()
@@ -2766,7 +2813,7 @@ func NewPoints3fVectorFromPoints(pts [][]Point3f) Points3fVector {
 // ToPoints returns a slice of slices of Point3f for the data in this Points3fVector.
 func (pvs Points3fVector) ToPoints() [][]Point3f {
 	ppoints := make([][]Point3f, pvs.Size())
-	for j := 0;j < pvs.Size();j++{
+	for j := 0; j < pvs.Size(); j++ {
 		pts := pvs.At(j)
 		points := pts.ToPoints()
 		ppoints[j] = points
@@ -2789,7 +2836,7 @@ func (pvs Points3fVector) At(idx int) Point3fVector {
 	if idx > pvs.Size() {
 		return Point3fVector{}
 	}
-	return Point3fVector{p : C.Points3fVector_At(pvs.p, C.int(idx))}
+	return Point3fVector{p: C.Points3fVector_At(pvs.p, C.int(idx))}
 }
 
 // Append appends a Point3fVector at end of the Points3fVector.
