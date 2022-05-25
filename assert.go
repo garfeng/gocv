@@ -21,14 +21,14 @@ func Caller(skip int) (name string, line int) {
 	return base + "/" + name, line
 }
 
-func PanicWithCaller(skip int, e any) {
+func PanicWithCaller(skip int, e interface{}) {
 	file, line := Caller(skip + 1)
 
 	msg := fmt.Sprint("[", file, ":", line, "] ", e)
 	panic(msg)
 }
 
-func MustEqual(a any, b any, format string, i ...interface{}) {
+func MustEqual(a interface{}, b interface{}, format string, i ...interface{}) {
 	if reflect.DeepEqual(a, b) {
 		return
 	}

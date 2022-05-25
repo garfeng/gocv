@@ -681,72 +681,102 @@ func (m *Mat) Step() int {
 // GetUCharAt returns a value from a specific row/col
 // in this Mat expecting it to be of type uchar aka CV_8U.
 func (m *Mat) GetUCharAt(row int, col int) uint8 {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	return uint8(C.Mat_GetUChar(m.p, C.int(row), C.int(col)))
 }
 
 // GetUCharAt3 returns a value from a specific x, y, z coordinate location
 // in this Mat expecting it to be of type uchar aka CV_8U.
 func (m *Mat) GetUCharAt3(x, y, z int) uint8 {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	return uint8(C.Mat_GetUChar3(m.p, C.int(x), C.int(y), C.int(z)))
 }
 
 // GetSCharAt returns a value from a specific row/col
 // in this Mat expecting it to be of type schar aka CV_8S.
 func (m *Mat) GetSCharAt(row int, col int) int8 {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	return int8(C.Mat_GetSChar(m.p, C.int(row), C.int(col)))
 }
 
 // GetSCharAt3 returns a value from a specific x, y, z coordinate location
 // in this Mat expecting it to be of type schar aka CV_8S.
 func (m *Mat) GetSCharAt3(x, y, z int) int8 {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	return int8(C.Mat_GetSChar3(m.p, C.int(x), C.int(y), C.int(z)))
 }
 
 // GetShortAt returns a value from a specific row/col
 // in this Mat expecting it to be of type short aka CV_16S.
 func (m *Mat) GetShortAt(row int, col int) int16 {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	return int16(C.Mat_GetShort(m.p, C.int(row), C.int(col)))
 }
 
 // GetShortAt3 returns a value from a specific x, y, z coordinate location
 // in this Mat expecting it to be of type short aka CV_16S.
 func (m *Mat) GetShortAt3(x, y, z int) int16 {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	return int16(C.Mat_GetShort3(m.p, C.int(x), C.int(y), C.int(z)))
 }
 
 // GetIntAt returns a value from a specific row/col
 // in this Mat expecting it to be of type int aka CV_32S.
 func (m *Mat) GetIntAt(row int, col int) int32 {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	return int32(C.Mat_GetInt(m.p, C.int(row), C.int(col)))
 }
 
 // GetIntAt3 returns a value from a specific x, y, z coordinate location
 // in this Mat expecting it to be of type int aka CV_32S.
 func (m *Mat) GetIntAt3(x, y, z int) int32 {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	return int32(C.Mat_GetInt3(m.p, C.int(x), C.int(y), C.int(z)))
 }
 
 // GetFloatAt returns a value from a specific row/col
 // in this Mat expecting it to be of type float aka CV_32F.
 func (m *Mat) GetFloatAt(row int, col int) float32 {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	return float32(C.Mat_GetFloat(m.p, C.int(row), C.int(col)))
 }
 
 // GetFloatAt3 returns a value from a specific x, y, z coordinate location
 // in this Mat expecting it to be of type float aka CV_32F.
 func (m *Mat) GetFloatAt3(x, y, z int) float32 {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	return float32(C.Mat_GetFloat3(m.p, C.int(x), C.int(y), C.int(z)))
 }
 
 // GetDoubleAt returns a value from a specific row/col
 // in this Mat expecting it to be of type double aka CV_64F.
 func (m *Mat) GetDoubleAt(row int, col int) float64 {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	return float64(C.Mat_GetDouble(m.p, C.int(row), C.int(col)))
 }
 
 // GetDoubleAt3 returns a value from a specific x, y, z coordinate location
 // in this Mat expecting it to be of type double aka CV_64F.
 func (m *Mat) GetDoubleAt3(x, y, z int) float64 {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	return float64(C.Mat_GetDouble3(m.p, C.int(x), C.int(y), C.int(z)))
 }
 
@@ -765,72 +795,96 @@ func (m *Mat) SetTo(s Scalar) {
 // SetUCharAt sets a value at a specific row/col
 // in this Mat expecting it to be of type uchar aka CV_8U.
 func (m *Mat) SetUCharAt(row int, col int, val uint8) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
 	C.Mat_SetUChar(m.p, C.int(row), C.int(col), C.uint8_t(val))
 }
 
 // SetUCharAt3 sets a value at a specific x, y, z coordinate location
 // in this Mat expecting it to be of type uchar aka CV_8U.
 func (m *Mat) SetUCharAt3(x, y, z int, val uint8) {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	C.Mat_SetUChar3(m.p, C.int(x), C.int(y), C.int(z), C.uint8_t(val))
 }
 
 // SetSCharAt sets a value at a specific row/col
 // in this Mat expecting it to be of type schar aka CV_8S.
 func (m *Mat) SetSCharAt(row int, col int, val int8) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
 	C.Mat_SetSChar(m.p, C.int(row), C.int(col), C.int8_t(val))
 }
 
 // SetSCharAt3 sets a value at a specific x, y, z coordinate location
 // in this Mat expecting it to be of type schar aka CV_8S.
 func (m *Mat) SetSCharAt3(x, y, z int, val int8) {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	C.Mat_SetSChar3(m.p, C.int(x), C.int(y), C.int(z), C.int8_t(val))
 }
 
 // SetShortAt sets a value at a specific row/col
 // in this Mat expecting it to be of type short aka CV_16S.
 func (m *Mat) SetShortAt(row int, col int, val int16) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
 	C.Mat_SetShort(m.p, C.int(row), C.int(col), C.int16_t(val))
 }
 
 // SetShortAt3 sets a value at a specific x, y, z coordinate location
 // in this Mat expecting it to be of type short aka CV_16S.
 func (m *Mat) SetShortAt3(x, y, z int, val int16) {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	C.Mat_SetShort3(m.p, C.int(x), C.int(y), C.int(z), C.int16_t(val))
 }
 
 // SetIntAt sets a value at a specific row/col
 // in this Mat expecting it to be of type int aka CV_32S.
 func (m *Mat) SetIntAt(row int, col int, val int32) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
 	C.Mat_SetInt(m.p, C.int(row), C.int(col), C.int32_t(val))
 }
 
 // SetIntAt3 sets a value at a specific x, y, z coordinate location
 // in this Mat expecting it to be of type int aka CV_32S.
 func (m *Mat) SetIntAt3(x, y, z int, val int32) {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	C.Mat_SetInt3(m.p, C.int(x), C.int(y), C.int(z), C.int32_t(val))
 }
 
 // SetFloatAt sets a value at a specific row/col
 // in this Mat expecting it to be of type float aka CV_32F.
 func (m *Mat) SetFloatAt(row int, col int, val float32) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
 	C.Mat_SetFloat(m.p, C.int(row), C.int(col), C.float(val))
 }
 
 // SetFloatAt3 sets a value at a specific x, y, z coordinate location
 // in this Mat expecting it to be of type float aka CV_32F.
 func (m *Mat) SetFloatAt3(x, y, z int, val float32) {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	C.Mat_SetFloat3(m.p, C.int(x), C.int(y), C.int(z), C.float(val))
 }
 
 // SetDoubleAt sets a value at a specific row/col
 // in this Mat expecting it to be of type double aka CV_64F.
 func (m *Mat) SetDoubleAt(row int, col int, val float64) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
 	C.Mat_SetDouble(m.p, C.int(row), C.int(col), C.double(val))
 }
 
 // SetDoubleAt3 sets a value at a specific x, y, z coordinate location
 // in this Mat expecting it to be of type double aka CV_64F.
 func (m *Mat) SetDoubleAt3(x, y, z int, val float64) {
+	sz := m.Size()
+	Must(x < sz[0] && y < sz[1] && z < sz[2], "x < size.x && y < size.y && z < size.z")
+
 	C.Mat_SetDouble3(m.p, C.int(x), C.int(y), C.int(z), C.double(val))
 }
 
@@ -1966,6 +2020,8 @@ type Vecb []uint8
 // GetVecbAt returns a vector of bytes. Its size corresponds to the number
 // of channels of the Mat.
 func (m *Mat) GetVecbAt(row int, col int) Vecb {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	ch := m.Channels()
 	v := make(Vecb, ch)
 
@@ -1982,6 +2038,8 @@ type Vecf []float32
 // GetVecfAt returns a vector of floats. Its size corresponds to the number of
 // channels of the Mat.
 func (m *Mat) GetVecfAt(row int, col int) Vecf {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	ch := m.Channels()
 	v := make(Vecf, ch)
 
@@ -1998,6 +2056,8 @@ type Vecd []float64
 // GetVecdAt returns a vector of float64s. Its size corresponds to the number
 // of channels of the Mat.
 func (m *Mat) GetVecdAt(row int, col int) Vecd {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	ch := m.Channels()
 	v := make(Vecd, ch)
 
@@ -2014,6 +2074,8 @@ type Veci []int32
 // GetVeciAt returns a vector of integers. Its size corresponds to the number
 // of channels of the Mat.
 func (m *Mat) GetVeciAt(row int, col int) Veci {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+
 	ch := m.Channels()
 	v := make(Veci, ch)
 
