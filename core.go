@@ -681,7 +681,7 @@ func (m *Mat) Step() int {
 // GetUCharAt returns a value from a specific row/col
 // in this Mat expecting it to be of type uchar aka CV_8U.
 func (m *Mat) GetUCharAt(row int, col int) uint8 {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 
 	return uint8(C.Mat_GetUChar(m.p, C.int(row), C.int(col)))
 }
@@ -698,7 +698,7 @@ func (m *Mat) GetUCharAt3(x, y, z int) uint8 {
 // GetSCharAt returns a value from a specific row/col
 // in this Mat expecting it to be of type schar aka CV_8S.
 func (m *Mat) GetSCharAt(row int, col int) int8 {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 
 	return int8(C.Mat_GetSChar(m.p, C.int(row), C.int(col)))
 }
@@ -715,7 +715,7 @@ func (m *Mat) GetSCharAt3(x, y, z int) int8 {
 // GetShortAt returns a value from a specific row/col
 // in this Mat expecting it to be of type short aka CV_16S.
 func (m *Mat) GetShortAt(row int, col int) int16 {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 
 	return int16(C.Mat_GetShort(m.p, C.int(row), C.int(col)))
 }
@@ -732,7 +732,7 @@ func (m *Mat) GetShortAt3(x, y, z int) int16 {
 // GetIntAt returns a value from a specific row/col
 // in this Mat expecting it to be of type int aka CV_32S.
 func (m *Mat) GetIntAt(row int, col int) int32 {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 
 	return int32(C.Mat_GetInt(m.p, C.int(row), C.int(col)))
 }
@@ -749,7 +749,7 @@ func (m *Mat) GetIntAt3(x, y, z int) int32 {
 // GetFloatAt returns a value from a specific row/col
 // in this Mat expecting it to be of type float aka CV_32F.
 func (m *Mat) GetFloatAt(row int, col int) float32 {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 
 	return float32(C.Mat_GetFloat(m.p, C.int(row), C.int(col)))
 }
@@ -766,7 +766,7 @@ func (m *Mat) GetFloatAt3(x, y, z int) float32 {
 // GetDoubleAt returns a value from a specific row/col
 // in this Mat expecting it to be of type double aka CV_64F.
 func (m *Mat) GetDoubleAt(row int, col int) float64 {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 
 	return float64(C.Mat_GetDouble(m.p, C.int(row), C.int(col)))
 }
@@ -795,7 +795,7 @@ func (m *Mat) SetTo(s Scalar) {
 // SetUCharAt sets a value at a specific row/col
 // in this Mat expecting it to be of type uchar aka CV_8U.
 func (m *Mat) SetUCharAt(row int, col int, val uint8) {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 	C.Mat_SetUChar(m.p, C.int(row), C.int(col), C.uint8_t(val))
 }
 
@@ -811,7 +811,7 @@ func (m *Mat) SetUCharAt3(x, y, z int, val uint8) {
 // SetSCharAt sets a value at a specific row/col
 // in this Mat expecting it to be of type schar aka CV_8S.
 func (m *Mat) SetSCharAt(row int, col int, val int8) {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 	C.Mat_SetSChar(m.p, C.int(row), C.int(col), C.int8_t(val))
 }
 
@@ -827,7 +827,7 @@ func (m *Mat) SetSCharAt3(x, y, z int, val int8) {
 // SetShortAt sets a value at a specific row/col
 // in this Mat expecting it to be of type short aka CV_16S.
 func (m *Mat) SetShortAt(row int, col int, val int16) {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 	C.Mat_SetShort(m.p, C.int(row), C.int(col), C.int16_t(val))
 }
 
@@ -843,7 +843,7 @@ func (m *Mat) SetShortAt3(x, y, z int, val int16) {
 // SetIntAt sets a value at a specific row/col
 // in this Mat expecting it to be of type int aka CV_32S.
 func (m *Mat) SetIntAt(row int, col int, val int32) {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 	C.Mat_SetInt(m.p, C.int(row), C.int(col), C.int32_t(val))
 }
 
@@ -859,7 +859,7 @@ func (m *Mat) SetIntAt3(x, y, z int, val int32) {
 // SetFloatAt sets a value at a specific row/col
 // in this Mat expecting it to be of type float aka CV_32F.
 func (m *Mat) SetFloatAt(row int, col int, val float32) {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 	C.Mat_SetFloat(m.p, C.int(row), C.int(col), C.float(val))
 }
 
@@ -875,7 +875,7 @@ func (m *Mat) SetFloatAt3(x, y, z int, val float32) {
 // SetDoubleAt sets a value at a specific row/col
 // in this Mat expecting it to be of type double aka CV_64F.
 func (m *Mat) SetDoubleAt(row int, col int, val float64) {
-	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	Must(row < m.Rows() && col < m.Cols()*m.Channels(), "row < m.rows && col < m.cols * m.channels")
 	C.Mat_SetDouble(m.p, C.int(row), C.int(col), C.double(val))
 }
 
@@ -2032,6 +2032,16 @@ func (m *Mat) GetVecbAt(row int, col int) Vecb {
 	return v
 }
 
+func (m *Mat) SetVecbAt(row int, col int, data Vecb) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	ch := m.Channels()
+	Must(len(data) <= ch, "len(data) < m.channels")
+
+	for i, c := range data {
+		m.SetUCharAt(row, col*ch+i, c)
+	}
+}
+
 // Vecf is a generic vector of floats.
 type Vecf []float32
 
@@ -2048,6 +2058,16 @@ func (m *Mat) GetVecfAt(row int, col int) Vecf {
 	}
 
 	return v
+}
+
+func (m *Mat) SetVecfAt(row int, col int, data Vecf) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	ch := m.Channels()
+	Must(len(data) <= ch, "len(data) < m.channels")
+
+	for i, c := range data {
+		m.SetFloatAt(row, col*ch+i, c)
+	}
 }
 
 // Vecd is a generic vector of float64/doubles.
@@ -2068,6 +2088,16 @@ func (m *Mat) GetVecdAt(row int, col int) Vecd {
 	return v
 }
 
+func (m *Mat) SetVecdAt(row int, col int, data Vecd) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	ch := m.Channels()
+	Must(len(data) <= ch, "len(data) < m.channels")
+
+	for i, c := range data {
+		m.SetDoubleAt(row, col*ch+i, c)
+	}
+}
+
 // Veci is a generic vector of integers.
 type Veci []int32
 
@@ -2084,6 +2114,16 @@ func (m *Mat) GetVeciAt(row int, col int) Veci {
 	}
 
 	return v
+}
+
+func (m *Mat) SetVeciAt(row int, col int, data Veci) {
+	Must(row < m.Rows() && col < m.Cols(), "row < m.rows && col < m.cols")
+	ch := m.Channels()
+	Must(len(data) <= ch, "len(data) < m.channels")
+
+	for i, c := range data {
+		m.SetIntAt(row, col*ch+i, c)
+	}
 }
 
 // PointVector is a wrapper around a std::vector< cv::Point >*
