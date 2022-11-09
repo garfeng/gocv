@@ -510,7 +510,7 @@ Points3fVector Points3fVector_NewFromPoints(Contours3f points);
 int Points3fVector_Size(Points3fVector ps);
 Point3fVector Points3fVector_At(Points3fVector ps, int idx);
 void Points3fVector_Append(Points3fVector psv, Point3fVector pv);
-void Points3fVector_Close(Points3fVector ps);
+_declspec(dllexport) void Points3fVector_Close(Points3fVector ps);
 
 #ifdef __cplusplus
 }
