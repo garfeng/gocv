@@ -209,7 +209,8 @@ struct RotatedRect MinAreaRect(PointVector pts){
     Point centrpt = {int(lroundf(cvrect.center.x)), int(lroundf(cvrect.center.y))};
     Size szsz = {int(lroundf(cvrect.size.width)), int(lroundf(cvrect.size.height))};
 
-    RotatedRect retrect = {(Contour){rpts, 4}, r, centrpt, szsz, cvrect.angle};
+
+    RotatedRect retrect = {{rpts, 4}, r, centrpt, szsz, cvrect.angle};
     return retrect;
 }
 
@@ -250,7 +251,7 @@ Mat GetStructuringElement(int shape, Size ksize) {
 
 Scalar MorphologyDefaultBorderValue(){
     cv::Scalar cs = cv::morphologyDefaultBorderValue();
-    return (Scalar){cs[0],cs[1],cs[2],cs[3]};
+    return {cs[0],cs[1],cs[2],cs[3]};
 }
 
 void MorphologyEx(Mat src, Mat dst, int op, Mat kernel) {

@@ -2,11 +2,12 @@ cmake_minimum_required(VERSION 3.0 )
 
 project(cvglue)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 if(CMAKE_HOST_WIN32 EQUAL 1)
 set(OpenCV_DIR C:/opencv/install-vs/install)
+set(CUDA_TOOLKIT_ROOT_DIR D:/cuda/)
 else()
 set(OpenCV_DIR $ENV{HOME}/opencv/)
 endif()
@@ -22,5 +23,5 @@ include_directories(
 
 file(GLOB_RECURSE sources *.cpp cuda/*.cpp contrib/*.cpp)
 
-add_library(cvglue STATIC ${sources})
+add_library(cvglue SHARED ${sources})
 target_link_libraries(cvglue  ${OpenCV_LIBS})
