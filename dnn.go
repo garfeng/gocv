@@ -5,6 +5,7 @@ package gocv
 #include "dnn.h"
 */
 import "C"
+
 import (
 	"image"
 	"reflect"
@@ -338,8 +339,8 @@ func ReadNetFromONNXBytes(model []byte) (Net, error) {
 // https://docs.opencv.org/trunk/d6/d0f/group__dnn.html#ga152367f253c81b53fe6862b299f5c5cd
 //
 func BlobFromImage(img Mat, scaleFactor float64, size image.Point, mean Scalar,
-	swapRB bool, crop bool) Mat {
-
+	swapRB bool, crop bool,
+) Mat {
 	sz := C.struct_Size{
 		width:  C.int(size.X),
 		height: C.int(size.Y),
@@ -363,8 +364,8 @@ func BlobFromImage(img Mat, scaleFactor float64, size image.Point, mean Scalar,
 // https://docs.opencv.org/master/d6/d0f/group__dnn.html#ga2b89ed84432e4395f5a1412c2926293c
 //
 func BlobFromImages(imgs []Mat, blob *Mat, scaleFactor float64, size image.Point, mean Scalar,
-	swapRB bool, crop bool, ddepth MatType) {
-
+	swapRB bool, crop bool, ddepth MatType,
+) {
 	cMatArray := make([]C.Mat, len(imgs))
 	for i, r := range imgs {
 		cMatArray[i] = r.p
@@ -452,7 +453,7 @@ func (net *Net) GetPerfProfile() float64 {
 func (net *Net) GetUnconnectedOutLayers() (ids []int) {
 	cids := C.IntVector{}
 	C.Net_GetUnconnectedOutLayers((C.Net)(net.p), &cids)
-	defer C.free(unsafe.Pointer(cids.val))
+	defer C.IntVector_Close(cids)
 
 	h := &reflect.SliceHeader{
 		Data: uintptr(unsafe.Pointer(cids.val)),
@@ -550,7 +551,8 @@ func NMSBoxes(bboxes []image.Rectangle, scores []float32, scoreThreshold float32
 	indicesVector := C.IntVector{}
 
 	C.NMSBoxes(bboxesRects, scoresVector, C.float(scoreThreshold), C.float(nmsThreshold), &indicesVector)
-	defer C.free(unsafe.Pointer(indicesVector.val))
+
+	defer C.IntVector_Close(indicesVector)
 
 	h := &reflect.SliceHeader{
 		Data: uintptr(unsafe.Pointer(indicesVector.val)),
@@ -598,7 +600,7 @@ func NMSBoxesWithParams(bboxes []image.Rectangle, scores []float32, scoreThresho
 	indicesVector := C.IntVector{}
 
 	C.NMSBoxesWithParams(bboxesRects, scoresVector, C.float(scoreThreshold), C.float(nmsThreshold), &indicesVector, C.float(eta), C.int(topK))
-	defer C.free(unsafe.Pointer(indicesVector.val))
+	defer C.IntVector_Close(indicesVector)
 
 	h := &reflect.SliceHeader{
 		Data: uintptr(unsafe.Pointer(indicesVector.val)),
