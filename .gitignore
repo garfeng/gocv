@@ -11,3 +11,6 @@ count.out
 contrib/data.yaml
 contrib/testOilPainting.png
 build
+*.dll
+*.exe
+vendor/

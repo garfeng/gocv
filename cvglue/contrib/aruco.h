@@ -54,17 +54,17 @@ typedef struct ArucoDetectorParameters
     bool detectInvertedMarker;
 } ArucoDetectorParameters;
 
-ArucoDetectorParameters ArucoDetectorParameters_Create();
+DLL_EXPORT ArucoDetectorParameters ArucoDetectorParameters_Create();
 
-ArucoDictionary getPredefinedDictionary(int dictionaryId);
+DLL_EXPORT ArucoDictionary getPredefinedDictionary(int dictionaryId);
 
-void detectMarkers(Mat inputArr, ArucoDictionary dictionary, Points2fVector markerCorners, IntVector *markerIds, ArucoDetectorParameters params, Points2fVector rejectedCandidates);
+DLL_EXPORT void detectMarkers(Mat inputArr, ArucoDictionary dictionary, Points2fVector markerCorners, IntVector *markerIds, ArucoDetectorParameters params, Points2fVector rejectedCandidates);
 
-void detectMarkersWithDictId(Mat inputArr, int dictionaryId, Points2fVector markerCorners, IntVector *markerIds, ArucoDetectorParameters params, Points2fVector rejectedCandidates);
+DLL_EXPORT void detectMarkersWithDictId(Mat inputArr, int dictionaryId, Points2fVector markerCorners, IntVector *markerIds, ArucoDetectorParameters params, Points2fVector rejectedCandidates);
 
-void drawDetectedMarkers(Mat image, Points2fVector markerCorners, IntVector markerIds, Scalar borderColor);
+DLL_EXPORT void drawDetectedMarkers(Mat image, Points2fVector markerCorners, IntVector markerIds, Scalar borderColor);
 
-void drawMarker(int dictionaryId, int id, int sidePixels, Mat img, int borderBits);
+DLL_EXPORT void drawMarker(int dictionaryId, int id, int sidePixels, Mat img, int borderBits);
 
 #ifdef __cplusplus
 }

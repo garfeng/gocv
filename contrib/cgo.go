@@ -8,7 +8,7 @@ package contrib
 /*
 #cgo !windows LDFLAGS: -L./../cvglue/build
 #cgo CXXFLAGS:   --std=c++11
-#cgo CPPFLAGS:   -I./../cvglue
+#cgo CPPFLAGS:   -I./../cvglue/contrib
 #cgo windows  LDFLAGS:   -L./../cvglue/build/Release/
 #cgo LDFLAGS: -lcvglue
 */

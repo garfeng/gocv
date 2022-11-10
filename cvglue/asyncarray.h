@@ -12,10 +12,10 @@ typedef cv::AsyncArray* AsyncArray;
 typedef void* AsyncArray;
 #endif
 
-AsyncArray AsyncArray_New();
-const char* AsyncArray_GetAsync(AsyncArray async_out,Mat out);
-void AsyncArray_Close(AsyncArray a);
-AsyncArray Net_forwardAsync(Net net, const char* outputName);
+DLL_EXPORT AsyncArray AsyncArray_New();
+DLL_EXPORT const char* AsyncArray_GetAsync(AsyncArray async_out,Mat out);
+DLL_EXPORT void AsyncArray_Close(AsyncArray a);
+DLL_EXPORT AsyncArray Net_forwardAsync(Net net, const char* outputName);
 
 
 #ifdef __cplusplus

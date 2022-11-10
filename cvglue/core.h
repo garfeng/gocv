@@ -1,8 +1,10 @@
 #ifndef _OPENCV3_CORE_H_
 #define _OPENCV3_CORE_H_
 
+
 #include <stdint.h>
 #include <stdbool.h>
+#include "mvsc.h"
 
 // Wrapper for std::vector<string>
 typedef struct CStrings {
@@ -29,7 +31,9 @@ typedef struct FloatVector {
 
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
+
 extern "C" {
+
 #endif
 
 typedef struct RawData {
@@ -256,261 +260,259 @@ typedef struct Mats {
     int length;
 } Mats;
 
-Mat Mats_get(struct Mats mats, int i);
-struct DMatches MultiDMatches_get(struct MultiDMatches mds, int index);
+DLL_EXPORT Mat Mats_get(struct Mats mats, int i);
+DLL_EXPORT struct DMatches MultiDMatches_get(struct MultiDMatches mds, int index);
 
-struct ByteArray toByteArray(const char* buf, int len);
-void ByteArray_Release(struct ByteArray buf);
+DLL_EXPORT struct ByteArray toByteArray(const char* buf, int len);
+DLL_EXPORT void ByteArray_Release(struct ByteArray buf);
 
-void Contours_Close(struct Contours cs);
-void KeyPoints_Close(struct KeyPoints ks);
-void Rects_Close(struct Rects rs);
-void Mats_Close(struct Mats mats);
-void Point_Close(struct Point p);
-void Points_Close(struct Points ps);
-void DMatches_Close(struct DMatches ds);
-void MultiDMatches_Close(struct MultiDMatches mds);
+DLL_EXPORT void Contours_Close(struct Contours cs);
+DLL_EXPORT void KeyPoints_Close(struct KeyPoints ks);
+DLL_EXPORT void Rects_Close(struct Rects rs);
+DLL_EXPORT void Mats_Close(struct Mats mats);
+DLL_EXPORT void Point_Close(struct Point p);
+DLL_EXPORT void Points_Close(struct Points ps);
+DLL_EXPORT void DMatches_Close(struct DMatches ds);
+DLL_EXPORT void MultiDMatches_Close(struct MultiDMatches mds);
 
-Mat Mat_New();
-Mat Mat_NewWithSize(int rows, int cols, int type);
-Mat Mat_NewWithSizes(struct IntVector sizes, int type);
-Mat Mat_NewWithSizesFromScalar(IntVector sizes, int type, Scalar ar);
-Mat Mat_NewWithSizesFromBytes(IntVector sizes, int type, struct ByteArray buf);
-Mat Mat_NewFromScalar(const Scalar ar, int type);
-Mat Mat_NewWithSizeFromScalar(const Scalar ar, int rows, int cols, int type);
-Mat Mat_NewFromBytes(int rows, int cols, int type, struct ByteArray buf);
-Mat Mat_FromPtr(Mat m, int rows, int cols, int type, int prows, int pcols);
-void Mat_Close(Mat m);
-int Mat_Empty(Mat m);
-bool Mat_IsContinuous(Mat m);
-Mat Mat_Clone(Mat m);
-void Mat_CopyTo(Mat m, Mat dst);
-int Mat_Total(Mat m);
-void Mat_Size(Mat m, IntVector* res);
-void Mat_CopyToWithMask(Mat m, Mat dst, Mat mask);
-void Mat_ConvertTo(Mat m, Mat dst, int type);
-void Mat_ConvertToWithParams(Mat m, Mat dst, int type, float alpha, float beta);
-struct ByteArray Mat_ToBytes(Mat m);
-struct ByteArray Mat_DataPtr(Mat m);
-Mat Mat_Region(Mat m, Rect r);
-Mat Mat_Reshape(Mat m, int cn, int rows);
-void Mat_PatchNaNs(Mat m);
-Mat Mat_ConvertFp16(Mat m);
-Scalar Mat_Mean(Mat m);
-Scalar Mat_MeanWithMask(Mat m, Mat mask);
-Mat Mat_Sqrt(Mat m);
-int Mat_Rows(Mat m);
-int Mat_Cols(Mat m);
-int Mat_Channels(Mat m);
-int Mat_Type(Mat m);
-int Mat_Step(Mat m);
-int Mat_ElemSize(Mat m);
-Mat Eye(int rows, int cols, int type);
-Mat Zeros(int rows, int cols, int type);
-Mat Ones(int rows, int cols, int type);
+DLL_EXPORT Mat Mat_New();
+DLL_EXPORT Mat Mat_NewWithSize(int rows, int cols, int type);
+DLL_EXPORT Mat Mat_NewWithSizes(struct IntVector sizes, int type);
+DLL_EXPORT Mat Mat_NewWithSizesFromScalar(IntVector sizes, int type, Scalar ar);
+DLL_EXPORT Mat Mat_NewWithSizesFromBytes(IntVector sizes, int type, struct ByteArray buf);
+DLL_EXPORT Mat Mat_NewFromScalar(const Scalar ar, int type);
+DLL_EXPORT Mat Mat_NewWithSizeFromScalar(const Scalar ar, int rows, int cols, int type);
+DLL_EXPORT Mat Mat_NewFromBytes(int rows, int cols, int type, struct ByteArray buf);
+DLL_EXPORT Mat Mat_FromPtr(Mat m, int rows, int cols, int type, int prows, int pcols);
+DLL_EXPORT void Mat_Close(Mat m);
+DLL_EXPORT int Mat_Empty(Mat m);
+DLL_EXPORT bool Mat_IsContinuous(Mat m);
+DLL_EXPORT Mat Mat_Clone(Mat m);
+DLL_EXPORT void Mat_CopyTo(Mat m, Mat dst);
+DLL_EXPORT int Mat_Total(Mat m);
+DLL_EXPORT void Mat_Size(Mat m, IntVector* res);
+DLL_EXPORT void Mat_CopyToWithMask(Mat m, Mat dst, Mat mask);
+DLL_EXPORT void Mat_ConvertTo(Mat m, Mat dst, int type);
+DLL_EXPORT void Mat_ConvertToWithParams(Mat m, Mat dst, int type, float alpha, float beta);
+DLL_EXPORT struct ByteArray Mat_ToBytes(Mat m);
+DLL_EXPORT struct ByteArray Mat_DataPtr(Mat m);
+DLL_EXPORT Mat Mat_Region(Mat m, Rect r);
+DLL_EXPORT Mat Mat_Reshape(Mat m, int cn, int rows);
+DLL_EXPORT void Mat_PatchNaNs(Mat m);
+DLL_EXPORT Mat Mat_ConvertFp16(Mat m);
+DLL_EXPORT Scalar Mat_Mean(Mat m);
+DLL_EXPORT Scalar Mat_MeanWithMask(Mat m, Mat mask);
+DLL_EXPORT Mat Mat_Sqrt(Mat m);
+DLL_EXPORT int Mat_Rows(Mat m);
+DLL_EXPORT int Mat_Cols(Mat m);
+DLL_EXPORT int Mat_Channels(Mat m);
+DLL_EXPORT int Mat_Type(Mat m);
+DLL_EXPORT int Mat_Step(Mat m);
+DLL_EXPORT int Mat_ElemSize(Mat m);
+DLL_EXPORT Mat Eye(int rows, int cols, int type);
+DLL_EXPORT Mat Zeros(int rows, int cols, int type);
+DLL_EXPORT Mat Ones(int rows, int cols, int type);
 
-uint8_t Mat_GetUChar(Mat m, int row, int col);
-uint8_t Mat_GetUChar3(Mat m, int x, int y, int z);
-int8_t Mat_GetSChar(Mat m, int row, int col);
-int8_t Mat_GetSChar3(Mat m, int x, int y, int z);
-int16_t Mat_GetShort(Mat m, int row, int col);
-int16_t Mat_GetShort3(Mat m, int x, int y, int z);
-int32_t Mat_GetInt(Mat m, int row, int col);
-int32_t Mat_GetInt3(Mat m, int x, int y, int z);
-float Mat_GetFloat(Mat m, int row, int col);
-float Mat_GetFloat3(Mat m, int x, int y, int z);
-double Mat_GetDouble(Mat m, int row, int col);
-double Mat_GetDouble3(Mat m, int x, int y, int z);
+DLL_EXPORT uint8_t Mat_GetUChar(Mat m, int row, int col);
+DLL_EXPORT uint8_t Mat_GetUChar3(Mat m, int x, int y, int z);
+DLL_EXPORT int8_t Mat_GetSChar(Mat m, int row, int col);
+DLL_EXPORT int8_t Mat_GetSChar3(Mat m, int x, int y, int z);
+DLL_EXPORT int16_t Mat_GetShort(Mat m, int row, int col);
+DLL_EXPORT int16_t Mat_GetShort3(Mat m, int x, int y, int z);
+DLL_EXPORT int32_t Mat_GetInt(Mat m, int row, int col);
+DLL_EXPORT int32_t Mat_GetInt3(Mat m, int x, int y, int z);
+DLL_EXPORT float Mat_GetFloat(Mat m, int row, int col);
+DLL_EXPORT float Mat_GetFloat3(Mat m, int x, int y, int z);
+DLL_EXPORT double Mat_GetDouble(Mat m, int row, int col);
+DLL_EXPORT double Mat_GetDouble3(Mat m, int x, int y, int z);
 
-void Mat_SetTo(Mat m, Scalar value);
-void Mat_SetUChar(Mat m, int row, int col, uint8_t val);
-void Mat_SetUChar3(Mat m, int x, int y, int z, uint8_t val);
-void Mat_SetSChar(Mat m, int row, int col, int8_t val);
-void Mat_SetSChar3(Mat m, int x, int y, int z, int8_t val);
-void Mat_SetShort(Mat m, int row, int col, int16_t val);
-void Mat_SetShort3(Mat m, int x, int y, int z, int16_t val);
-void Mat_SetInt(Mat m, int row, int col, int32_t val);
-void Mat_SetInt3(Mat m, int x, int y, int z, int32_t val);
-void Mat_SetFloat(Mat m, int row, int col, float val);
-void Mat_SetFloat3(Mat m, int x, int y, int z, float val);
-void Mat_SetDouble(Mat m, int row, int col, double val);
-void Mat_SetDouble3(Mat m, int x, int y, int z, double val);
+DLL_EXPORT void Mat_SetTo(Mat m, Scalar value);
+DLL_EXPORT void Mat_SetUChar(Mat m, int row, int col, uint8_t val);
+DLL_EXPORT void Mat_SetUChar3(Mat m, int x, int y, int z, uint8_t val);
+DLL_EXPORT void Mat_SetSChar(Mat m, int row, int col, int8_t val);
+DLL_EXPORT void Mat_SetSChar3(Mat m, int x, int y, int z, int8_t val);
+DLL_EXPORT void Mat_SetShort(Mat m, int row, int col, int16_t val);
+DLL_EXPORT void Mat_SetShort3(Mat m, int x, int y, int z, int16_t val);
+DLL_EXPORT void Mat_SetInt(Mat m, int row, int col, int32_t val);
+DLL_EXPORT void Mat_SetInt3(Mat m, int x, int y, int z, int32_t val);
+DLL_EXPORT void Mat_SetFloat(Mat m, int row, int col, float val);
+DLL_EXPORT void Mat_SetFloat3(Mat m, int x, int y, int z, float val);
+DLL_EXPORT void Mat_SetDouble(Mat m, int row, int col, double val);
+DLL_EXPORT void Mat_SetDouble3(Mat m, int x, int y, int z, double val);
 
-void Mat_AddUChar(Mat m, uint8_t val);
-void Mat_SubtractUChar(Mat m, uint8_t val);
-void Mat_MultiplyUChar(Mat m, uint8_t val);
-void Mat_DivideUChar(Mat m, uint8_t val);
-void Mat_AddFloat(Mat m, float val);
-void Mat_SubtractFloat(Mat m, float val);
-void Mat_MultiplyFloat(Mat m, float val);
-void Mat_DivideFloat(Mat m, float val);
-Mat Mat_MultiplyMatrix(Mat x, Mat y);
+DLL_EXPORT void Mat_AddUChar(Mat m, uint8_t val);
+DLL_EXPORT void Mat_SubtractUChar(Mat m, uint8_t val);
+DLL_EXPORT void Mat_MultiplyUChar(Mat m, uint8_t val);
+DLL_EXPORT void Mat_DivideUChar(Mat m, uint8_t val);
+DLL_EXPORT void Mat_AddFloat(Mat m, float val);
+DLL_EXPORT void Mat_SubtractFloat(Mat m, float val);
+DLL_EXPORT void Mat_MultiplyFloat(Mat m, float val);
+DLL_EXPORT void Mat_DivideFloat(Mat m, float val);
+DLL_EXPORT Mat Mat_MultiplyMatrix(Mat x, Mat y);
 
-Mat Mat_T(Mat x);
+DLL_EXPORT Mat Mat_T(Mat x);
 
-void LUT(Mat src, Mat lut, Mat dst);
+DLL_EXPORT void LUT(Mat src, Mat lut, Mat dst);
 
-void Mat_AbsDiff(Mat src1, Mat src2, Mat dst);
-void Mat_Add(Mat src1, Mat src2, Mat dst);
-void Mat_AddWeighted(Mat src1, double alpha, Mat src2, double beta, double gamma, Mat dst);
-void Mat_BitwiseAnd(Mat src1, Mat src2, Mat dst);
-void Mat_BitwiseAndWithMask(Mat src1, Mat src2, Mat dst, Mat mask);
-void Mat_BitwiseNot(Mat src1, Mat dst);
-void Mat_BitwiseNotWithMask(Mat src1, Mat dst, Mat mask);
-void Mat_BitwiseOr(Mat src1, Mat src2, Mat dst);
-void Mat_BitwiseOrWithMask(Mat src1, Mat src2, Mat dst, Mat mask);
-void Mat_BitwiseXor(Mat src1, Mat src2, Mat dst);
-void Mat_BitwiseXorWithMask(Mat src1, Mat src2, Mat dst, Mat mask);
-void Mat_Compare(Mat src1, Mat src2, Mat dst, int ct);
-void Mat_BatchDistance(Mat src1, Mat src2, Mat dist, int dtype, Mat nidx, int normType, int K,
-                       Mat mask, int update, bool crosscheck);
-int Mat_BorderInterpolate(int p, int len, int borderType);
-void Mat_CalcCovarMatrix(Mat samples, Mat covar, Mat mean, int flags, int ctype);
-void Mat_CartToPolar(Mat x, Mat y, Mat magnitude, Mat angle, bool angleInDegrees);
-bool Mat_CheckRange(Mat m);
-void Mat_CompleteSymm(Mat m, bool lowerToUpper);
-void Mat_ConvertScaleAbs(Mat src, Mat dst, double alpha, double beta);
-void Mat_CopyMakeBorder(Mat src, Mat dst, int top, int bottom, int left, int right, int borderType,
-                        Scalar value);
-int Mat_CountNonZero(Mat src);
-void Mat_DCT(Mat src, Mat dst, int flags);
-double Mat_Determinant(Mat m);
-void Mat_DFT(Mat m, Mat dst, int flags);
-void Mat_Divide(Mat src1, Mat src2, Mat dst);
-bool Mat_Eigen(Mat src, Mat eigenvalues, Mat eigenvectors);
-void Mat_EigenNonSymmetric(Mat src, Mat eigenvalues, Mat eigenvectors);
-void Mat_Exp(Mat src, Mat dst);
-void Mat_ExtractChannel(Mat src, Mat dst, int coi);
-void Mat_FindNonZero(Mat src, Mat idx);
-void Mat_Flip(Mat src, Mat dst, int flipCode);
-void Mat_Gemm(Mat src1, Mat src2, double alpha, Mat src3, double beta, Mat dst, int flags);
-int Mat_GetOptimalDFTSize(int vecsize);
-void Mat_Hconcat(Mat src1, Mat src2, Mat dst);
-void Mat_Vconcat(Mat src1, Mat src2, Mat dst);
-void Rotate(Mat src, Mat dst, int rotationCode);
-void Mat_Idct(Mat src, Mat dst, int flags);
-void Mat_Idft(Mat src, Mat dst, int flags, int nonzeroRows);
-void Mat_InRange(Mat src, Mat lowerb, Mat upperb, Mat dst);
-void Mat_InRangeWithScalar(Mat src, const Scalar lowerb, const Scalar upperb, Mat dst);
-void Mat_InsertChannel(Mat src, Mat dst, int coi);
-double Mat_Invert(Mat src, Mat dst, int flags);
-double KMeans(Mat data, int k, Mat bestLabels, TermCriteria criteria, int attempts, int flags, Mat centers);
-double KMeansPoints(PointVector pts, int k, Mat bestLabels, TermCriteria criteria, int attempts, int flags, Mat centers);
-void Mat_Log(Mat src, Mat dst);
-void Mat_Magnitude(Mat x, Mat y, Mat magnitude);
-void Mat_Max(Mat src1, Mat src2, Mat dst);
-void Mat_MeanStdDev(Mat src, Mat dstMean, Mat dstStdDev);
-void Mat_Merge(struct Mats mats, Mat dst);
-void Mat_Min(Mat src1, Mat src2, Mat dst);
-void Mat_MinMaxIdx(Mat m, double* minVal, double* maxVal, int* minIdx, int* maxIdx);
-void Mat_MinMaxLoc(Mat m, double* minVal, double* maxVal, Point* minLoc, Point* maxLoc);
-void Mat_MixChannels(struct Mats src, struct Mats dst, struct IntVector fromTo);
-void Mat_MulSpectrums(Mat a, Mat b, Mat c, int flags);
-void Mat_Multiply(Mat src1, Mat src2, Mat dst);
-void Mat_MultiplyWithParams(Mat src1, Mat src2, Mat dst, double scale, int dtype);
-void Mat_Subtract(Mat src1, Mat src2, Mat dst);
-void Mat_Normalize(Mat src, Mat dst, double alpha, double beta, int typ);
-double Norm(Mat src1, int normType);
-double NormWithMats(Mat src1, Mat src2, int normType);
-void Mat_PerspectiveTransform(Mat src, Mat dst, Mat tm);
-bool Mat_Solve(Mat src1, Mat src2, Mat dst, int flags);
-int Mat_SolveCubic(Mat coeffs, Mat roots);
-double Mat_SolvePoly(Mat coeffs, Mat roots, int maxIters);
-void Mat_Reduce(Mat src, Mat dst, int dim, int rType, int dType);
-void Mat_Repeat(Mat src, int nY, int nX, Mat dst);
-void Mat_ScaleAdd(Mat src1, double alpha, Mat src2, Mat dst);
-void Mat_SetIdentity(Mat src, double scalar);
-void Mat_Sort(Mat src, Mat dst, int flags);
-void Mat_SortIdx(Mat src, Mat dst, int flags);
-void Mat_Split(Mat src, struct Mats* mats);
-void Mat_Subtract(Mat src1, Mat src2, Mat dst);
-Scalar Mat_Trace(Mat src);
-void Mat_Transform(Mat src, Mat dst, Mat tm);
-void Mat_Transpose(Mat src, Mat dst);
-void Mat_PolarToCart(Mat magnitude, Mat degree, Mat x, Mat y, bool angleInDegrees);
-void Mat_Pow(Mat src, double power, Mat dst);
-void Mat_Phase(Mat x, Mat y, Mat angle, bool angleInDegrees);
-Scalar Mat_Sum(Mat src1);
+DLL_EXPORT void Mat_AbsDiff(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_Add(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_AddWeighted(Mat src1, double alpha, Mat src2, double beta, double gamma, Mat dst);
+DLL_EXPORT void Mat_BitwiseAnd(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_BitwiseAndWithMask(Mat src1, Mat src2, Mat dst, Mat mask);
+DLL_EXPORT void Mat_BitwiseNot(Mat src1, Mat dst);
+DLL_EXPORT void Mat_BitwiseNotWithMask(Mat src1, Mat dst, Mat mask);
+DLL_EXPORT void Mat_BitwiseOr(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_BitwiseOrWithMask(Mat src1, Mat src2, Mat dst, Mat mask);
+DLL_EXPORT void Mat_BitwiseXor(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_BitwiseXorWithMask(Mat src1, Mat src2, Mat dst, Mat mask);
+DLL_EXPORT void Mat_Compare(Mat src1, Mat src2, Mat dst, int ct);
+DLL_EXPORT void Mat_BatchDistance(Mat src1, Mat src2, Mat dist, int dtype, Mat nidx, int normType, int K, Mat mask, int update, bool crosscheck);
+DLL_EXPORT int Mat_BorderInterpolate(int p, int len, int borderType);
+DLL_EXPORT void Mat_CalcCovarMatrix(Mat samples, Mat covar, Mat mean, int flags, int ctype);
+DLL_EXPORT void Mat_CartToPolar(Mat x, Mat y, Mat magnitude, Mat angle, bool angleInDegrees);
+DLL_EXPORT bool Mat_CheckRange(Mat m);
+DLL_EXPORT void Mat_CompleteSymm(Mat m, bool lowerToUpper);
+DLL_EXPORT void Mat_ConvertScaleAbs(Mat src, Mat dst, double alpha, double beta);
+DLL_EXPORT void Mat_CopyMakeBorder(Mat src, Mat dst, int top, int bottom, int left, int right, int borderType,
+                         Scalar value);
+DLL_EXPORT int Mat_CountNonZero(Mat src);
+DLL_EXPORT void Mat_DCT(Mat src, Mat dst, int flags);
+DLL_EXPORT double Mat_Determinant(Mat m);
+DLL_EXPORT void Mat_DFT(Mat m, Mat dst, int flags);
+DLL_EXPORT void Mat_Divide(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT bool Mat_Eigen(Mat src, Mat eigenvalues, Mat eigenvectors);
+DLL_EXPORT void Mat_EigenNonSymmetric(Mat src, Mat eigenvalues, Mat eigenvectors);
+DLL_EXPORT void Mat_Exp(Mat src, Mat dst);
+DLL_EXPORT void Mat_ExtractChannel(Mat src, Mat dst, int coi);
+DLL_EXPORT void Mat_FindNonZero(Mat src, Mat idx);
+DLL_EXPORT void Mat_Flip(Mat src, Mat dst, int flipCode);
+DLL_EXPORT void Mat_Gemm(Mat src1, Mat src2, double alpha, Mat src3, double beta, Mat dst, int flags);
+DLL_EXPORT int Mat_GetOptimalDFTSize(int vecsize);
+DLL_EXPORT void Mat_Hconcat(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_Vconcat(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Rotate(Mat src, Mat dst, int rotationCode);
+DLL_EXPORT void Mat_Idct(Mat src, Mat dst, int flags);
+DLL_EXPORT void Mat_Idft(Mat src, Mat dst, int flags, int nonzeroRows);
+DLL_EXPORT void Mat_InRange(Mat src, Mat lowerb, Mat upperb, Mat dst);
+DLL_EXPORT void Mat_InRangeWithScalar(Mat src, const Scalar lowerb, const Scalar upperb, Mat dst);
+DLL_EXPORT void Mat_InsertChannel(Mat src, Mat dst, int coi);
+DLL_EXPORT double Mat_Invert(Mat src, Mat dst, int flags);
+DLL_EXPORT double KMeans(Mat data, int k, Mat bestLabels, TermCriteria criteria, int attempts, int flags, Mat centers);
+DLL_EXPORT double KMeansPoints(PointVector pts, int k, Mat bestLabels, TermCriteria criteria, int attempts, int flags, Mat centers);
+DLL_EXPORT void Mat_Log(Mat src, Mat dst);
+DLL_EXPORT void Mat_Magnitude(Mat x, Mat y, Mat magnitude);
+DLL_EXPORT void Mat_Max(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_MeanStdDev(Mat src, Mat dstMean, Mat dstStdDev);
+DLL_EXPORT void Mat_Merge(struct Mats mats, Mat dst);
+DLL_EXPORT void Mat_Min(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_MinMaxIdx(Mat m, double* minVal, double* maxVal, int* minIdx, int* maxIdx);
+DLL_EXPORT void Mat_MinMaxLoc(Mat m, double* minVal, double* maxVal, Point* minLoc, Point* maxLoc);
+DLL_EXPORT void Mat_MixChannels(struct Mats src, struct Mats dst, struct IntVector fromTo);
+DLL_EXPORT void Mat_MulSpectrums(Mat a, Mat b, Mat c, int flags);
+DLL_EXPORT void Mat_Multiply(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_MultiplyWithParams(Mat src1, Mat src2, Mat dst, double scale, int dtype);
+DLL_EXPORT void Mat_Subtract(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT void Mat_Normalize(Mat src, Mat dst, double alpha, double beta, int typ);
+DLL_EXPORT double Norm(Mat src1, int normType);
+DLL_EXPORT double NormWithMats(Mat src1, Mat src2, int normType);
+DLL_EXPORT void Mat_PerspectiveTransform(Mat src, Mat dst, Mat tm);
+DLL_EXPORT bool Mat_Solve(Mat src1, Mat src2, Mat dst, int flags);
+DLL_EXPORT int Mat_SolveCubic(Mat coeffs, Mat roots);
+DLL_EXPORT double Mat_SolvePoly(Mat coeffs, Mat roots, int maxIters);
+DLL_EXPORT void Mat_Reduce(Mat src, Mat dst, int dim, int rType, int dType);
+DLL_EXPORT void Mat_Repeat(Mat src, int nY, int nX, Mat dst);
+DLL_EXPORT void Mat_ScaleAdd(Mat src1, double alpha, Mat src2, Mat dst);
+DLL_EXPORT void Mat_SetIdentity(Mat src, double scalar);
+DLL_EXPORT void Mat_Sort(Mat src, Mat dst, int flags);
+DLL_EXPORT void Mat_SortIdx(Mat src, Mat dst, int flags);
+DLL_EXPORT void Mat_Split(Mat src, struct Mats* mats);
+DLL_EXPORT void Mat_Subtract(Mat src1, Mat src2, Mat dst);
+DLL_EXPORT Scalar Mat_Trace(Mat src);
+DLL_EXPORT void Mat_Transform(Mat src, Mat dst, Mat tm);
+DLL_EXPORT void Mat_Transpose(Mat src, Mat dst);
+DLL_EXPORT void Mat_PolarToCart(Mat magnitude, Mat degree, Mat x, Mat y, bool angleInDegrees);
+DLL_EXPORT void Mat_Pow(Mat src, double power, Mat dst);
+DLL_EXPORT void Mat_Phase(Mat x, Mat y, Mat angle, bool angleInDegrees);
+DLL_EXPORT Scalar Mat_Sum(Mat src1);
 
-TermCriteria TermCriteria_New(int typ, int maxCount, double epsilon);
+DLL_EXPORT TermCriteria TermCriteria_New(int typ, int maxCount, double epsilon);
 
-int64_t GetCVTickCount();
-double GetTickFrequency();
+DLL_EXPORT int64_t GetCVTickCount();
+DLL_EXPORT double GetTickFrequency();
 
-Mat Mat_rowRange(Mat m,int startrow,int endrow);
-Mat Mat_colRange(Mat m,int startrow,int endrow);
+DLL_EXPORT Mat Mat_rowRange(Mat m,int startrow,int endrow);
+DLL_EXPORT Mat Mat_colRange(Mat m,int startrow,int endrow);
 
-PointVector PointVector_New();
-PointVector PointVector_NewFromPoints(Contour points);
-PointVector PointVector_NewFromMat(Mat mat);
-Point PointVector_At(PointVector pv, int idx);
-void PointVector_Append(PointVector pv, Point p);
-int PointVector_Size(PointVector pv);
-void PointVector_Close(PointVector pv);
+DLL_EXPORT PointVector PointVector_New();
+DLL_EXPORT PointVector PointVector_NewFromPoints(Contour points);
+DLL_EXPORT PointVector PointVector_NewFromMat(Mat mat);
+DLL_EXPORT Point PointVector_At(PointVector pv, int idx);
+DLL_EXPORT void PointVector_Append(PointVector pv, Point p);
+DLL_EXPORT int PointVector_Size(PointVector pv);
+DLL_EXPORT void PointVector_Close(PointVector pv);
 
-PointsVector PointsVector_New();
-PointsVector PointsVector_NewFromPoints(Contours points);
-PointVector PointsVector_At(PointsVector psv, int idx);
-void PointsVector_Append(PointsVector psv, PointVector pv);
-int PointsVector_Size(PointsVector psv);
-void PointsVector_Close(PointsVector psv);
+DLL_EXPORT PointsVector PointsVector_New();
+DLL_EXPORT PointsVector PointsVector_NewFromPoints(Contours points);
+DLL_EXPORT PointVector PointsVector_At(PointsVector psv, int idx);
+DLL_EXPORT void PointsVector_Append(PointsVector psv, PointVector pv);
+DLL_EXPORT int PointsVector_Size(PointsVector psv);
+DLL_EXPORT void PointsVector_Close(PointsVector psv);
 
-Point2fVector Point2fVector_New();
-void Point2fVector_Close(Point2fVector pfv);
-Point2fVector Point2fVector_NewFromPoints(Contour2f pts);
-Point2fVector Point2fVector_NewFromMat(Mat mat);
-Point2f Point2fVector_At(Point2fVector pfv, int idx);
-int Point2fVector_Size(Point2fVector pfv);
+DLL_EXPORT Point2fVector Point2fVector_New();
+DLL_EXPORT void Point2fVector_Close(Point2fVector pfv);
+DLL_EXPORT Point2fVector Point2fVector_NewFromPoints(Contour2f pts);
+DLL_EXPORT Point2fVector Point2fVector_NewFromMat(Mat mat);
+DLL_EXPORT Point2f Point2fVector_At(Point2fVector pfv, int idx);
+DLL_EXPORT int Point2fVector_Size(Point2fVector pfv);
 
-void IntVector_Close(struct IntVector ivec);
+DLL_EXPORT void IntVector_Close(struct IntVector ivec);
 
-void CStrings_Close(struct CStrings cstrs);
+DLL_EXPORT void CStrings_Close(struct CStrings cstrs);
 
-RNG TheRNG();
+DLL_EXPORT RNG TheRNG();
 
-void SetRNGSeed(int seed);
+DLL_EXPORT void SetRNGSeed(int seed);
 
-void RNG_Fill(RNG rng, Mat mat, int distType, double a, double b, bool saturateRange);
+DLL_EXPORT void RNG_Fill(RNG rng, Mat mat, int distType, double a, double b, bool saturateRange);
 
-double RNG_Gaussian(RNG rng, double sigma);
+DLL_EXPORT double RNG_Gaussian(RNG rng, double sigma);
 
-unsigned int RNG_Next(RNG rng);
+DLL_EXPORT unsigned int RNG_Next(RNG rng);
 
-void RandN(Mat mat, Scalar mean, Scalar stddev);
+DLL_EXPORT void RandN(Mat mat, Scalar mean, Scalar stddev);
 
-void RandShuffle(Mat mat);
+DLL_EXPORT void RandShuffle(Mat mat);
 
-void RandShuffleWithParams(Mat mat, double iterFactor, RNG rng);
+DLL_EXPORT void RandShuffleWithParams(Mat mat, double iterFactor, RNG rng);
 
-void RandU(Mat mat, Scalar low, Scalar high);
+DLL_EXPORT void RandU(Mat mat, Scalar low, Scalar high);
 
-void copyPointVectorToPoint2fVector(PointVector src, Point2fVector dest);
+DLL_EXPORT void copyPointVectorToPoint2fVector(PointVector src, Point2fVector dest);
 
-void StdByteVectorInitialize(void* data);
-void StdByteVectorFree(void *data);
-size_t StdByteVectorLen(void *data);
-uint8_t* StdByteVectorData(void *data);
+DLL_EXPORT void StdByteVectorInitialize(void* data);
+DLL_EXPORT void StdByteVectorFree(void *data);
+DLL_EXPORT size_t StdByteVectorLen(void *data);
+DLL_EXPORT uint8_t* StdByteVectorData(void *data);
+DLL_EXPORT Points2fVector Points2fVector_New();
+DLL_EXPORT Points2fVector Points2fVector_NewFromPoints(Contours2f points);
+DLL_EXPORT int Points2fVector_Size(Points2fVector ps);
+DLL_EXPORT Point2fVector Points2fVector_At(Points2fVector ps, int idx);
+DLL_EXPORT void Points2fVector_Append(Points2fVector psv, Point2fVector pv);
+DLL_EXPORT void Points2fVector_Close(Points2fVector ps);
 
-Points2fVector Points2fVector_New();
-Points2fVector Points2fVector_NewFromPoints(Contours2f points);
-int Points2fVector_Size(Points2fVector ps);
-Point2fVector Points2fVector_At(Points2fVector ps, int idx);
-void Points2fVector_Append(Points2fVector psv, Point2fVector pv);
-void Points2fVector_Close(Points2fVector ps);
-
-Point3fVector Point3fVector_New();
-Point3fVector Point3fVector_NewFromPoints(Contour3f points);
-Point3fVector Point3fVector_NewFromMat(Mat mat);
-void Point3fVector_Append(Point3fVector pfv, Point3f point);
-Point3f Point3fVector_At(Point3fVector pfv, int idx);
-int Point3fVector_Size(Point3fVector pfv);
-void Point3fVector_Close(Point3fVector pv);
-Points3fVector Points3fVector_New();
-Points3fVector Points3fVector_NewFromPoints(Contours3f points);
-int Points3fVector_Size(Points3fVector ps);
-Point3fVector Points3fVector_At(Points3fVector ps, int idx);
-void Points3fVector_Append(Points3fVector psv, Point3fVector pv);
-_declspec(dllexport) void Points3fVector_Close(Points3fVector ps);
+DLL_EXPORT Point3fVector Point3fVector_New();
+DLL_EXPORT Point3fVector Point3fVector_NewFromPoints(Contour3f points);
+DLL_EXPORT Point3fVector Point3fVector_NewFromMat(Mat mat);
+DLL_EXPORT void Point3fVector_Append(Point3fVector pfv, Point3f point);
+DLL_EXPORT Point3f Point3fVector_At(Point3fVector pfv, int idx);
+DLL_EXPORT int Point3fVector_Size(Point3fVector pfv);
+DLL_EXPORT void Point3fVector_Close(Point3fVector pv);
+DLL_EXPORT Points3fVector Points3fVector_New();
+DLL_EXPORT Points3fVector Points3fVector_NewFromPoints(Contours3f points);
+DLL_EXPORT int Points3fVector_Size(Points3fVector ps);
+DLL_EXPORT Point3fVector Points3fVector_At(Points3fVector ps, int idx);
+DLL_EXPORT void Points3fVector_Append(Points3fVector psv, Point3fVector pv);
+DLL_EXPORT void Points3fVector_Close(Points3fVector ps);
 
 #ifdef __cplusplus
 }

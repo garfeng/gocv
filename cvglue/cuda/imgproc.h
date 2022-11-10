@@ -23,32 +23,32 @@ typedef void* HoughSegmentDetector;
 #endif
 
 // standalone functions
-void GpuCvtColor(GpuMat src, GpuMat dst, int code, Stream s);
+DLL_EXPORT void GpuCvtColor(GpuMat src, GpuMat dst, int code, Stream s);
 
 // CannyEdgeDetector
-CannyEdgeDetector CreateCannyEdgeDetector(double lowThresh, double highThresh);
-CannyEdgeDetector CreateCannyEdgeDetectorWithParams(double lowThresh, double highThresh, int appertureSize, bool L2gradient);
-void CannyEdgeDetector_Close(CannyEdgeDetector det);
-void CannyEdgeDetector_Detect(CannyEdgeDetector det, GpuMat img, GpuMat dst, Stream s);
-int CannyEdgeDetector_GetAppertureSize(CannyEdgeDetector det);
-double CannyEdgeDetector_GetHighThreshold(CannyEdgeDetector det);
-bool CannyEdgeDetector_GetL2Gradient(CannyEdgeDetector det);
-double CannyEdgeDetector_GetLowThreshold(CannyEdgeDetector det);
-void CannyEdgeDetector_SetAppertureSize(CannyEdgeDetector det, int appertureSize);
-void CannyEdgeDetector_SetHighThreshold(CannyEdgeDetector det, double highThresh);
-void CannyEdgeDetector_SetL2Gradient(CannyEdgeDetector det, bool L2gradient);
-void CannyEdgeDetector_SetLowThreshold(CannyEdgeDetector det, double lowThresh);
+DLL_EXPORT CannyEdgeDetector CreateCannyEdgeDetector(double lowThresh, double highThresh);
+DLL_EXPORT CannyEdgeDetector CreateCannyEdgeDetectorWithParams(double lowThresh, double highThresh, int appertureSize, bool L2gradient);
+DLL_EXPORT void CannyEdgeDetector_Close(CannyEdgeDetector det);
+DLL_EXPORT void CannyEdgeDetector_Detect(CannyEdgeDetector det, GpuMat img, GpuMat dst, Stream s);
+DLL_EXPORT int CannyEdgeDetector_GetAppertureSize(CannyEdgeDetector det);
+DLL_EXPORT double CannyEdgeDetector_GetHighThreshold(CannyEdgeDetector det);
+DLL_EXPORT bool CannyEdgeDetector_GetL2Gradient(CannyEdgeDetector det);
+DLL_EXPORT double CannyEdgeDetector_GetLowThreshold(CannyEdgeDetector det);
+DLL_EXPORT void CannyEdgeDetector_SetAppertureSize(CannyEdgeDetector det, int appertureSize);
+DLL_EXPORT void CannyEdgeDetector_SetHighThreshold(CannyEdgeDetector det, double highThresh);
+DLL_EXPORT void CannyEdgeDetector_SetL2Gradient(CannyEdgeDetector det, bool L2gradient);
+DLL_EXPORT void CannyEdgeDetector_SetLowThreshold(CannyEdgeDetector det, double lowThresh);
 
 // HoughLinesDetector
-HoughLinesDetector HoughLinesDetector_Create(double rho, double theta, int threshold);
-HoughLinesDetector HoughLinesDetector_CreateWithParams(double rho, double theta, int threshold, bool sort, int maxlines);
-void HoughLinesDetector_Close(HoughLinesDetector hld);
-void HoughLinesDetector_Detect(HoughLinesDetector hld, GpuMat img, GpuMat dst, Stream s);
+DLL_EXPORT HoughLinesDetector HoughLinesDetector_Create(double rho, double theta, int threshold);
+DLL_EXPORT HoughLinesDetector HoughLinesDetector_CreateWithParams(double rho, double theta, int threshold, bool sort, int maxlines);
+DLL_EXPORT void HoughLinesDetector_Close(HoughLinesDetector hld);
+DLL_EXPORT void HoughLinesDetector_Detect(HoughLinesDetector hld, GpuMat img, GpuMat dst, Stream s);
 
 // HoughSegmentDetector
-HoughSegmentDetector HoughSegmentDetector_Create(double rho, double theta, int minLineLength, int maxLineGap);
-void HoughSegmentDetector_Close(HoughSegmentDetector hsd);
-void HoughSegmentDetector_Detect(HoughSegmentDetector hsd, GpuMat img, GpuMat dst, Stream s);
+DLL_EXPORT HoughSegmentDetector HoughSegmentDetector_Create(double rho, double theta, int minLineLength, int maxLineGap);
+DLL_EXPORT void HoughSegmentDetector_Close(HoughSegmentDetector hsd);
+DLL_EXPORT void HoughSegmentDetector_Detect(HoughSegmentDetector hsd, GpuMat img, GpuMat dst, Stream s);
 
 #ifdef __cplusplus
 }

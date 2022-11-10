@@ -17,25 +17,25 @@ typedef void* VideoWriter;
 #endif
 
 // VideoCapture
-VideoCapture VideoCapture_New();
-void VideoCapture_Close(VideoCapture v);
-bool VideoCapture_Open(VideoCapture v, const char* uri);
-bool VideoCapture_OpenWithAPI(VideoCapture v, const char* uri, int apiPreference);
-bool VideoCapture_OpenDevice(VideoCapture v, int device);
-bool VideoCapture_OpenDeviceWithAPI(VideoCapture v, int device, int apiPreference);
-void VideoCapture_Set(VideoCapture v, int prop, double param);
-double VideoCapture_Get(VideoCapture v, int prop);
-int VideoCapture_IsOpened(VideoCapture v);
-int VideoCapture_Read(VideoCapture v, Mat buf);
-void VideoCapture_Grab(VideoCapture v, int skip);
+DLL_EXPORT VideoCapture VideoCapture_New();
+DLL_EXPORT void VideoCapture_Close(VideoCapture v);
+DLL_EXPORT bool VideoCapture_Open(VideoCapture v, const char* uri);
+DLL_EXPORT bool VideoCapture_OpenWithAPI(VideoCapture v, const char* uri, int apiPreference);
+DLL_EXPORT bool VideoCapture_OpenDevice(VideoCapture v, int device);
+DLL_EXPORT bool VideoCapture_OpenDeviceWithAPI(VideoCapture v, int device, int apiPreference);
+DLL_EXPORT void VideoCapture_Set(VideoCapture v, int prop, double param);
+DLL_EXPORT double VideoCapture_Get(VideoCapture v, int prop);
+DLL_EXPORT int VideoCapture_IsOpened(VideoCapture v);
+DLL_EXPORT int VideoCapture_Read(VideoCapture v, Mat buf);
+DLL_EXPORT void VideoCapture_Grab(VideoCapture v, int skip);
 
 // VideoWriter
-VideoWriter VideoWriter_New();
-void VideoWriter_Close(VideoWriter vw);
-void VideoWriter_Open(VideoWriter vw, const char* name, const char* codec, double fps, int width,
+DLL_EXPORT VideoWriter VideoWriter_New();
+DLL_EXPORT void VideoWriter_Close(VideoWriter vw);
+DLL_EXPORT void VideoWriter_Open(VideoWriter vw, const char* name, const char* codec, double fps, int width,
                       int height, bool isColor);
-int VideoWriter_IsOpened(VideoWriter vw);
-void VideoWriter_Write(VideoWriter vw, Mat img);
+DLL_EXPORT int VideoWriter_IsOpened(VideoWriter vw);
+DLL_EXPORT void VideoWriter_Write(VideoWriter vw, Mat img);
 
 #ifdef __cplusplus
 }

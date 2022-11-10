@@ -21,14 +21,14 @@ typedef void* TrackerKCF;
 typedef void* TrackerCSRT;
 #endif
 
-bool TrackerSubclass_Init(Tracker self, Mat image, Rect boundingBox);
-bool TrackerSubclass_Update(Tracker self, Mat image, Rect* boundingBox);
+DLL_EXPORT bool TrackerSubclass_Init(Tracker self, Mat image, Rect boundingBox);
+DLL_EXPORT bool TrackerSubclass_Update(Tracker self, Mat image, Rect* boundingBox);
 
-TrackerKCF TrackerKCF_Create();
-void TrackerKCF_Close(TrackerKCF self);
+DLL_EXPORT TrackerKCF TrackerKCF_Create();
+DLL_EXPORT void TrackerKCF_Close(TrackerKCF self);
 
-TrackerCSRT TrackerCSRT_Create();
-void TrackerCSRT_Close(TrackerCSRT self);
+DLL_EXPORT TrackerCSRT TrackerCSRT_Create();
+DLL_EXPORT void TrackerCSRT_Close(TrackerCSRT self);
 
 
 #ifdef __cplusplus

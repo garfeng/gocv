@@ -15,10 +15,10 @@ typedef cv::Ptr<cv::xfeatures2d::SURF>* SURF;
 typedef void* SURF;
 #endif
 
-SURF SURF_Create();
-void SURF_Close(SURF f);
-struct KeyPoints SURF_Detect(SURF f, Mat src);
-struct KeyPoints SURF_DetectAndCompute(SURF f, Mat src, Mat mask, Mat desc);
+DLL_EXPORT SURF SURF_Create();
+DLL_EXPORT void SURF_Close(SURF f);
+DLL_EXPORT struct KeyPoints SURF_Detect(SURF f, Mat src);
+DLL_EXPORT struct KeyPoints SURF_DetectAndCompute(SURF f, Mat src, Mat mask, Mat desc);
 
 #ifdef __cplusplus
 }

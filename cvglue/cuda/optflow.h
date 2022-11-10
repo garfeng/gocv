@@ -18,8 +18,8 @@ typedef cv::Ptr<cv::cuda::SparsePyrLKOpticalFlow>* CudaSparsePyrLKOpticalFlow;
 typedef void* CudaSparsePyrLKOpticalFlow;
 #endif
 
-CudaSparsePyrLKOpticalFlow CudaSparsePyrLKOpticalFlow_Create();
-void CudaSparsePyrLKOpticalFlow_Calc(CudaSparsePyrLKOpticalFlow p, GpuMat prevImg, GpuMat nextImg, GpuMat prevPts, GpuMat nextPts, GpuMat status);
+DLL_EXPORT CudaSparsePyrLKOpticalFlow CudaSparsePyrLKOpticalFlow_Create();
+DLL_EXPORT void CudaSparsePyrLKOpticalFlow_Calc(CudaSparsePyrLKOpticalFlow p, GpuMat prevImg, GpuMat nextImg, GpuMat prevPts, GpuMat nextPts, GpuMat status);
 
 #ifdef __cplusplus
 }

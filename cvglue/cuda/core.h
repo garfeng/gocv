@@ -9,7 +9,7 @@
 extern "C" {
 #endif
 
-void GpuRects_Close(struct Rects rs);
+DLL_EXPORT void GpuRects_Close(struct Rects rs);
 
 #ifdef __cplusplus
 }

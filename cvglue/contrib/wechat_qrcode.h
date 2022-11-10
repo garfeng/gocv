@@ -19,13 +19,13 @@ typedef void* WeChatQRCode;
 typedef void* StringsVector;
 #endif
 
-WeChatQRCode NewWeChatQRCode(const char *detector_prototxt_path, const char *detector_caffe_model_path,
+DLL_EXPORT WeChatQRCode NewWeChatQRCode(const char *detector_prototxt_path, const char *detector_caffe_model_path,
                              const char *super_resolution_prototxt_path, const char *super_resolution_caffe_model_path);
-CStrings WeChatQRCode_DetectAndDecode(WeChatQRCode wq, Mat img, struct Mats *points, StringsVector codes);
-StringsVector NewStringsVector();
-void WeChatQRCode_CStrings_Close(struct CStrings cstrs);
-void WeChatQRCode_Mats_Close(struct Mats mats);
-void WeChatQRCode_Mats_to(struct Mats mats, int i, Mat dst);
+DLL_EXPORT CStrings WeChatQRCode_DetectAndDecode(WeChatQRCode wq, Mat img, struct Mats *points, StringsVector codes);
+DLL_EXPORT StringsVector NewStringsVector();
+DLL_EXPORT void WeChatQRCode_CStrings_Close(struct CStrings cstrs);
+DLL_EXPORT void WeChatQRCode_Mats_Close(struct Mats mats);
+DLL_EXPORT void WeChatQRCode_Mats_to(struct Mats mats, int i, Mat dst);
 
 
 #ifdef __cplusplus

@@ -15,9 +15,9 @@ typedef cv::Ptr<cv::bgsegm::BackgroundSubtractorCNT>* BackgroundSubtractorCNT;
 typedef void* BackgroundSubtractorCNT;
 #endif
 
-BackgroundSubtractorCNT BackgroundSubtractorCNT_Create();
-void BackgroundSubtractorCNT_Close(BackgroundSubtractorCNT b);
-void BackgroundSubtractorCNT_Apply(BackgroundSubtractorCNT b, Mat src, Mat dst);
+DLL_EXPORT BackgroundSubtractorCNT BackgroundSubtractorCNT_Create();
+DLL_EXPORT void BackgroundSubtractorCNT_Close(BackgroundSubtractorCNT b);
+DLL_EXPORT void BackgroundSubtractorCNT_Apply(BackgroundSubtractorCNT b, Mat src, Mat dst);
 
 #ifdef __cplusplus
 }

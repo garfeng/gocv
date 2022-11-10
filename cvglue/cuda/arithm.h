@@ -11,24 +11,24 @@ extern "C" {
 #endif
 #include "cuda.h"
 
-void GpuAbs(GpuMat src, GpuMat dst, Stream s);
-void GpuAbsDiff(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuAdd(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuBitwiseAnd(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuBitwiseNot(GpuMat src, GpuMat dst, Stream s);
-void GpuBitwiseOr(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuBitwiseXor(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuDivide(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuExp(GpuMat src, GpuMat dst, Stream s);
-void GpuLog(GpuMat src, GpuMat dst, Stream s);
-void GpuMax(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuMin(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuMultiply(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuSqr(GpuMat src, GpuMat dst, Stream s);
-void GpuSqrt(GpuMat src, GpuMat dst, Stream s);
-void GpuSubtract(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
-void GpuThreshold(GpuMat src, GpuMat dst, double thresh, double maxval, int typ, Stream s);
-void GpuFlip(GpuMat src, GpuMat dst, int flipCode, Stream s);
+DLL_EXPORT void GpuAbs(GpuMat src, GpuMat dst, Stream s);
+DLL_EXPORT void GpuAbsDiff(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuAdd(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuBitwiseAnd(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuBitwiseNot(GpuMat src, GpuMat dst, Stream s);
+DLL_EXPORT void GpuBitwiseOr(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuBitwiseXor(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuDivide(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuExp(GpuMat src, GpuMat dst, Stream s);
+DLL_EXPORT void GpuLog(GpuMat src, GpuMat dst, Stream s);
+DLL_EXPORT void GpuMax(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuMin(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuMultiply(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuSqr(GpuMat src, GpuMat dst, Stream s);
+DLL_EXPORT void GpuSqrt(GpuMat src, GpuMat dst, Stream s);
+DLL_EXPORT void GpuSubtract(GpuMat src1, GpuMat src2, GpuMat dst, Stream s);
+DLL_EXPORT void GpuThreshold(GpuMat src, GpuMat dst, double thresh, double maxval, int typ, Stream s);
+DLL_EXPORT void GpuFlip(GpuMat src, GpuMat dst, int flipCode, Stream s);
 
 #ifdef __cplusplus
 }
