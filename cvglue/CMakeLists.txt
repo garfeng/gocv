@@ -12,16 +12,9 @@ else()
 set(OpenCV_DIR $ENV{HOME}/opencv/)
 endif()
 
-find_package(OpenCV REQUIRED)
 
-message("OPENCV_DIR: " ${OpenCV_INCLUDE_DIRS})
 
-include_directories(
-    ${OpenCV_INCLUDE_DIRS}
-    ${PROJECT_SOURCE_DIR}/include
-)
+add_subdirectory(gocv)
+add_subdirectory(contrib)
+add_subdirectory(cuda)
 
-file(GLOB_RECURSE sources *.cpp cuda/*.cpp contrib/*.cpp)
-
-add_library(cvglue SHARED ${sources})
-target_link_libraries(cvglue  ${OpenCV_LIBS})

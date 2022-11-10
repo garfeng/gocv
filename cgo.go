@@ -8,8 +8,7 @@ package gocv
 /*
 #cgo !windows LDFLAGS: -L./cvglue/build
 #cgo CXXFLAGS:   --std=c++11
-#cgo CPPFLAGS:   -I./cvglue
-#cgo windows  LDFLAGS:   -L./cvglue/build/Release/
-#cgo LDFLAGS: -lcvglue
+#cgo windows  LDFLAGS:   -LC:/opencv/cvglue/
+#cgo LDFLAGS: -lgocv
 */
 import "C"
