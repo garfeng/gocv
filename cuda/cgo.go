@@ -8,7 +8,7 @@ package cuda
 /*
 #cgo !windows LDFLAGS: -L/usr/local/lib
 #cgo CXXFLAGS:   --std=c++11
-#cgo windows  LDFLAGS:   -LC:/opencv/cvglue/
+#cgo windows  LDFLAGS:   -LC:/opencv/cvglue/bin
 #cgo LDFLAGS: -lgocv_cuda
 */
 import "C"
