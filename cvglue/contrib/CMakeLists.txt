@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0 )
 
-project(gocvcontrib)
+project(gocv_contrib)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -16,6 +16,6 @@ include_directories(
 
 file(GLOB_RECURSE sources *.cpp)
 
-add_library(gocvcontrib SHARED ${sources})
-target_link_libraries(gocvcontrib  gocv ${OpenCV_LIBS})
+add_library(gocv_contrib SHARED ${sources})
+target_link_libraries(gocv_contrib  gocv ${OpenCV_LIBS})
 

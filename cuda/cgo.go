@@ -6,9 +6,9 @@ package cuda
 // Changes here should be mirrored in gocv/cgo.go and contrib/cgo.go.
 
 /*
-#cgo !windows LDFLAGS: -L./../cvglue/build
+#cgo !windows LDFLAGS: -L/usr/local/lib
 #cgo CXXFLAGS:   --std=c++11
 #cgo windows  LDFLAGS:   -LC:/opencv/cvglue/
-#cgo LDFLAGS: -lgocvcuda
+#cgo LDFLAGS: -lgocv_cuda
 */
 import "C"
