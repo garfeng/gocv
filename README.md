@@ -8,7 +8,10 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/hybridgroup/gocv)](https://goreportcard.com/report/github.com/hybridgroup/gocv)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/hybridgroup/gocv/blob/release/LICENSE.txt)
 
+**[Use CUDA on Windows](./UseCudaOnWindows.md)**
+
 The GoCV package provides Go language bindings for the [OpenCV 4](http://opencv.org/) computer vision library.
+
 
 The GoCV package supports the latest releases of Go and OpenCV (v4.6.0) on Linux, macOS, and Windows. We intend to make the Go language a "first-class" client compatible with the latest developments in the OpenCV ecosystem.
 
