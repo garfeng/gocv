@@ -53,9 +53,9 @@ DLL_EXPORT void HoughSegmentDetector_Close(HoughSegmentDetector hsd);
 DLL_EXPORT void HoughSegmentDetector_Detect(HoughSegmentDetector hsd, GpuMat img, GpuMat dst, Stream s);
 
 // TemplateMatching
-TemplateMatching TemplateMatching_Create(int srcType, int method);
-void TemplateMatching_Close(TemplateMatching tm);
-void TemplateMatching_Match(TemplateMatching tm, GpuMat img, GpuMat tmpl, GpuMat dst, Stream s);
+DLL_EXPORT TemplateMatching TemplateMatching_Create(int srcType, int method);
+DLL_EXPORT void TemplateMatching_Close(TemplateMatching tm);
+DLL_EXPORT void TemplateMatching_Match(TemplateMatching tm, GpuMat img, GpuMat tmpl, GpuMat dst, Stream s);
 
 #ifdef __cplusplus
 }

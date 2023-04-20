@@ -49,7 +49,7 @@ DLL_EXPORT void EdgePreservingFilter(Mat src, Mat dst, int filter, float sigma_s
 DLL_EXPORT void PencilSketch(Mat src, Mat dst1, Mat dst2, float sigma_s, float sigma_r, float shade_factor);
 DLL_EXPORT void Stylization(Mat src, Mat dst, float sigma_s, float sigma_r);
 
-void PhotoInpaint(Mat src, Mat mask, Mat dst, float inpaint_radius, int algorithm_type);
+DLL_EXPORT void PhotoInpaint(Mat src, Mat mask, Mat dst, float inpaint_radius, int algorithm_type);
 
 #ifdef __cplusplus
 }

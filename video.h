@@ -49,42 +49,42 @@ DLL_EXPORT bool Tracker_Update(Tracker self, Mat image, Rect* boundingBox);
 DLL_EXPORT TrackerMIL TrackerMIL_Create();
 DLL_EXPORT void TrackerMIL_Close(TrackerMIL self);
 
-KalmanFilter KalmanFilter_New(int dynamParams, int measureParams);
-KalmanFilter KalmanFilter_NewWithParams(int dynamParams, int measureParams, int controlParams, int type);
-void KalmanFilter_Close(KalmanFilter kf);
+DLL_EXPORT KalmanFilter KalmanFilter_New(int dynamParams, int measureParams);
+DLL_EXPORT KalmanFilter KalmanFilter_NewWithParams(int dynamParams, int measureParams, int controlParams, int type);
+DLL_EXPORT void KalmanFilter_Close(KalmanFilter kf);
 
-void KalmanFilter_Init(KalmanFilter kf, int dynamParams, int measureParams);
-void KalmanFilter_InitWithParams(KalmanFilter kf, int dynamParams, int measureParams, int controlParams, int type);
-Mat KalmanFilter_Predict(KalmanFilter kf);
-Mat KalmanFilter_PredictWithParams(KalmanFilter kf, Mat control);
-Mat KalmanFilter_Correct(KalmanFilter kf, Mat measurement);
+DLL_EXPORT void KalmanFilter_Init(KalmanFilter kf, int dynamParams, int measureParams);
+DLL_EXPORT void KalmanFilter_InitWithParams(KalmanFilter kf, int dynamParams, int measureParams, int controlParams, int type);
+DLL_EXPORT Mat KalmanFilter_Predict(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_PredictWithParams(KalmanFilter kf, Mat control);
+DLL_EXPORT Mat KalmanFilter_Correct(KalmanFilter kf, Mat measurement);
 
-Mat KalmanFilter_GetStatePre(KalmanFilter kf);
-Mat KalmanFilter_GetStatePost(KalmanFilter kf);
-Mat KalmanFilter_GetTransitionMatrix(KalmanFilter kf);
-Mat KalmanFilter_GetControlMatrix(KalmanFilter kf);
-Mat KalmanFilter_GetMeasurementMatrix(KalmanFilter kf);
-Mat KalmanFilter_GetProcessNoiseCov(KalmanFilter kf);
-Mat KalmanFilter_GetMeasurementNoiseCov(KalmanFilter kf);
-Mat KalmanFilter_GetErrorCovPre(KalmanFilter kf);
-Mat KalmanFilter_GetGain(KalmanFilter kf);
-Mat KalmanFilter_GetErrorCovPost(KalmanFilter kf);
-Mat KalmanFilter_GetTemp1(KalmanFilter kf);
-Mat KalmanFilter_GetTemp2(KalmanFilter kf);
-Mat KalmanFilter_GetTemp3(KalmanFilter kf);
-Mat KalmanFilter_GetTemp4(KalmanFilter kf);
-Mat KalmanFilter_GetTemp5(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetStatePre(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetStatePost(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetTransitionMatrix(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetControlMatrix(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetMeasurementMatrix(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetProcessNoiseCov(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetMeasurementNoiseCov(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetErrorCovPre(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetGain(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetErrorCovPost(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetTemp1(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetTemp2(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetTemp3(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetTemp4(KalmanFilter kf);
+DLL_EXPORT Mat KalmanFilter_GetTemp5(KalmanFilter kf);
 
-void KalmanFilter_SetStatePre(KalmanFilter kf, Mat statePre);
-void KalmanFilter_SetStatePost(KalmanFilter kf, Mat statePost);
-void KalmanFilter_SetTransitionMatrix(KalmanFilter kf, Mat transitionMatrix);
-void KalmanFilter_SetControlMatrix(KalmanFilter kf, Mat controlMatrix);
-void KalmanFilter_SetMeasurementMatrix(KalmanFilter kf, Mat measurementMatrix);
-void KalmanFilter_SetProcessNoiseCov(KalmanFilter kf, Mat processNoiseCov);
-void KalmanFilter_SetMeasurementNoiseCov(KalmanFilter kf, Mat measurementNoiseCov);
-void KalmanFilter_SetErrorCovPre(KalmanFilter kf, Mat errorCovPre);
-void KalmanFilter_SetGain(KalmanFilter kf, Mat gain);
-void KalmanFilter_SetErrorCovPost(KalmanFilter kf, Mat errorCovPost);
+DLL_EXPORT void KalmanFilter_SetStatePre(KalmanFilter kf, Mat statePre);
+DLL_EXPORT void KalmanFilter_SetStatePost(KalmanFilter kf, Mat statePost);
+DLL_EXPORT void KalmanFilter_SetTransitionMatrix(KalmanFilter kf, Mat transitionMatrix);
+DLL_EXPORT void KalmanFilter_SetControlMatrix(KalmanFilter kf, Mat controlMatrix);
+DLL_EXPORT void KalmanFilter_SetMeasurementMatrix(KalmanFilter kf, Mat measurementMatrix);
+DLL_EXPORT void KalmanFilter_SetProcessNoiseCov(KalmanFilter kf, Mat processNoiseCov);
+DLL_EXPORT void KalmanFilter_SetMeasurementNoiseCov(KalmanFilter kf, Mat measurementNoiseCov);
+DLL_EXPORT void KalmanFilter_SetErrorCovPre(KalmanFilter kf, Mat errorCovPre);
+DLL_EXPORT void KalmanFilter_SetGain(KalmanFilter kf, Mat gain);
+DLL_EXPORT void KalmanFilter_SetErrorCovPost(KalmanFilter kf, Mat errorCovPost);
 
 #ifdef __cplusplus
 }
