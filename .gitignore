@@ -14,3 +14,5 @@ build
 *.dll
 *.exe
 vendor/
+.vs/
+cMakeSettings.json
